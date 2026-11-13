@@ -1,0 +1,13 @@
+{
+  "appId": "id.sch.cylinderodyssey",
+  "appName": "Cylinder Odyssey 3D",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#172554"
+  },
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  }
+}

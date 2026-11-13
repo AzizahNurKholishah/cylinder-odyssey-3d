@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Cylinder Odyssey 3D</string>
+    <string name="title_activity_main">Cylinder Odyssey 3D</string>
+    <string name="package_name">id.sch.cylinderodyssey</string>
+    <string name="custom_url_scheme">id.sch.cylinderodyssey</string>
+</resources>
