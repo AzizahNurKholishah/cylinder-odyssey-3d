@@ -33,7 +33,7 @@ export async function api(path, { method = 'GET', body } = {}) {
       body: body === undefined ? undefined : JSON.stringify(body),
     })
   } catch {
-    throw new ApiError(0, 'network', 'Tidak dapat terhubung ke server. Periksa koneksi internetmu.')
+    throw new ApiError(0, 'network', 'Tidak dapat terhubung ke server. Jika baru pertama dibuka, server sedang dinyalakan, jadi tunggu sekitar 1 menit lalu coba lagi. Periksa juga koneksi internetmu.')
   }
   let data = null
   try { data = await res.json() } catch { /* bukan JSON */ }

@@ -219,3 +219,13 @@ drop policy if exists "activity_logs_self_read" on public.activity_logs;
 create policy "activity_logs_self_read" on public.activity_logs for select to authenticated using (student_id = auth.uid());
 
 -- Penulisan hanya oleh backend (service role); tidak ada policy insert/update/delete untuk anon/authenticated.
+
+-- =====================================================================
+-- HAK AKSES (eksplisit, untuk proyek Supabase yang tidak otomatis
+-- membuka tabel baru ke Data API). RLS di atas tetap membatasi baris.
+-- =====================================================================
+grant usage on schema public to anon, authenticated, service_role;
+grant all on all tables in schema public to service_role;
+grant select on public.lessons, public.games, public.achievements to anon, authenticated;
+grant select on public.profiles, public.lesson_progress, public.practice_attempts, public.literacy_evaluations,
+  public.game_attempts, public.user_stats, public.user_achievements, public.activity_logs to authenticated;

@@ -40,7 +40,16 @@ def create_app() -> FastAPI:
 
     @app.get("/api/health", tags=["health"])
     def health():
-        return {"status": "ok", "data_backend": settings.data_backend}
+        """Cek server + koneksi database (dipakai untuk memverifikasi deploy)."""
+        from app.db import get_repository
+        try:
+            lessons = len(get_repository().select("lessons"))
+            students = len(get_repository().select("profiles", {"role": "student"}))
+            db = {"ok": True, "lessons": lessons, "students": students}
+        except Exception as exc:  # noqa: BLE001 — laporkan apa pun penyebabnya
+            log.error("Health check DB gagal: %s", exc)
+            db = {"ok": False, "error": str(exc)[:200]}
+        return {"status": "ok" if db["ok"] else "db_error", "data_backend": settings.data_backend, "database": db}
 
     for r in (auth, me, lessons, practice, evaluation, games, lab, admin):
         app.include_router(r.router, prefix="/api")

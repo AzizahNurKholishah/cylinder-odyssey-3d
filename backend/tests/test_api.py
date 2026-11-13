@@ -171,3 +171,8 @@ def test_admin(client, auth):
     students = client.get("/api/admin/students", headers=teacher).json()["students"]
     assert len(students) == 31
     login(client, "SMP8-31")
+
+
+def test_health_reports_database(client):
+    d = client.get("/api/health").json()
+    assert d["status"] == "ok" and d["database"] == {"ok": True, "lessons": 4, "students": 30}
