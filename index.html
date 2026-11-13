@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jelajahi Tabung — Cylinder Craft Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --grass-top: #5ec946;
+      --grass-dark: #3e9c2b;
+      --dirt-bg: #8b5a2b;
+      --dirt-dark: #5c3a1a;
+      --sky-top: #87ceeb;
+      --sky-bottom: #d9f3ff;
+      --wood-panel: #f4e4c1;
+      --wood-border: #8b5a2b;
+      --stone-bg: #c6c6c6;
+      --stone-dark: #555555;
+      --gold: #ffca28;
+      --diamond: #26c6da;
+      --emerald: #00e676;
+      --redstone: #ff5252;
+      --text-dark: #2d241e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 75%, var(--grass-top) 75%, var(--grass-dark) 80%, var(--dirt-bg) 80%, var(--dirt-dark) 100%);
+      min-height: 100vh;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      padding-bottom: 40px;
+    }
+
+    /* Pixel & Voxel Buttons */
+    .pixel-font { font-family: 'Press Start 2P', monospace; line-height: 1.5; }
+
+    .mc-btn {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 12px 20px;
+      border: 3px solid #1e1e1e;
+      box-shadow: inset 3px 3px 0px rgba(255,255,255,0.45), inset -3px -3px 0px rgba(0,0,0,0.3), 0 4px 0 #1e1e1e;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.08s, filter 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .mc-btn:hover { filter: brightness(1.07); }
+    .mc-btn:active {
+      transform: translateY(3px);
+      box-shadow: inset 3px 3px 0px rgba(255,255,255,0.3), inset -3px -3px 0px rgba(0,0,0,0.3), 0 1px 0 #1e1e1e;
+    }
+    .btn-green { background: #5ec946; color: #fff; text-shadow: 1px 1px 0 #235917; }
+    .btn-blue { background: #29b6f6; color: #fff; text-shadow: 1px 1px 0 #0d47a1; }
+    .btn-gold { background: #ffca28; color: #3e2723; }
+    .btn-red { background: #ef5350; color: #fff; text-shadow: 1px 1px 0 #7f0000; }
+    .btn-stone { background: #bdbdbd; color: #212121; }
+
+    .mc-panel {
+      background: var(--wood-panel);
+      border: 4px solid var(--wood-border);
+      box-shadow: inset 4px 4px 0 rgba(255,255,255,0.6), inset -4px -4px 0 rgba(139,90,43,0.35), 0 8px 0 rgba(0,0,0,0.2);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    /* Clouds Decoration */
+    .cloud {
+      position: fixed;
+      background: rgba(255,255,255,0.85);
+      height: 28px;
+      border-radius: 4px;
+      z-index: 0;
+      pointer-events: none;
+      box-shadow: 0 6px 0 rgba(200,230,255,0.6);
+      animation: floatCloud 45s linear infinite;
+    }
+    @keyframes floatCloud {
+      from { transform: translateX(-200px); }
+      to { transform: translateX(110vw); }
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top HUD */
+    .hud-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: #2b2b2b;
+      color: #fff;
+      border: 4px solid #141414;
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+    }
+    .player-badge { display: flex; align-items: center; gap: 12px; }
+    .avatar-box {
+      width: 46px; height: 46px;
+      background: #5ec946;
+      border: 3px solid #fff;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+    }
+    .xp-wrap { width: 170px; background: #111; height: 14px; border: 2px solid #555; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+    .xp-fill { height: 100%; background: linear-gradient(90deg, #00e676, #b2ff59); width: 0%; transition: width 0.4s ease; }
+
+    /* Screens */
+    .screen { display: none; animation: fadeIn 0.25s ease; }
+    .screen.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Login Screen */
+    .login-box { max-width: 480px; margin: 50px auto; text-align: center; }
+    .login-input {
+      width: 100%;
+      padding: 14px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: 3px solid var(--wood-border);
+      border-radius: 8px;
+      margin: 16px 0;
+      text-align: center;
+      background: #fffdf7;
+    }
+
+    /* Lobby Grid */
+    .lobby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .menu-card {
+      background: #fffdf5;
+      border: 4px solid #3e2723;
+      border-radius: 12px;
+      padding: 18px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 6px 0 #3e2723;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 #3e2723; }
+    .menu-icon { font-size: 2.4rem; margin-bottom: 8px; }
+    .tag-pill {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 2px solid #81c784;
+      margin-top: 10px;
+      width: fit-content;
+    }
+
+    /* Belajar Tabs */
+    .chapter-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .chapter-btn {
+      background: #fff;
+      border: 3px solid #8b5a2b;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: left;
+      cursor: pointer;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+    }
+    .chapter-btn.active { background: #ffca28; border-color: #3e2723; }
+    .chapter-btn.done::after { content: " ✅"; }
+
+    .formula-box {
+      background: #263238;
+      color: #80deea;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 3px solid #00acc1;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 12px 0;
+      text-align: center;
+    }
+
+    /* Lab Controls */
+    .lab-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; }
+    @media (max-width: 720px) { .lab-layout { grid-template-columns: 1fr; } }
+    .canvas-stage {
+      background: #e1f5fe;
+      border: 4px solid #0288d1;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    input[type="range"] { width: 100%; accent-color: #5ec946; cursor: pointer; margin: 8px 0 16px; }
+
+    /* Quest & Boss */
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      margin: 8px 0;
+      background: #fff;
+      border: 3px solid #8b5a2b;
+      border-radius: 8px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .option-btn:hover { background: #fff8e1; }
+    .option-btn.correct { background: #c8e6c9; border-color: #2e7d32; }
+    .option-btn.wrong { background: #ffcdd2; border-color: #c62828; }
+
+    .hp-bar { width: 100%; height: 18px; background: #333; border: 3px solid #111; border-radius: 6px; overflow: hidden; margin: 6px 0; }
+    .hp-fill-boss { height: 100%; background: #ff5252; transition: width 0.3s; }
+    .hp-fill-player { height: 100%; background: #00e676; transition: width 0.3s; }
+
+    /* Trophy Grid */
+    .trophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .trophy-card {
+      background: #e0e0e0;
+      border: 3px solid #757575;
+      border-radius: 10px;
+      padding: 14px;
+      opacity: 0.65;
+    }
+    .trophy-card.unlocked {
+      background: #fff9c4;
+      border-color: #f57f17;
+      opacity: 1;
+      box-shadow: 0 4px 0 #f57f17;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #2b2b2b;
+      color: #ffca28;
+      border: 3px solid #ffca28;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      z-index: 999;
+      transform: translateY(150%);
+      transition: transform 0.3s ease;
+    }
+    .toast.show { transform: translateY(0); }
+
+    footer {
+      text-align: center;
+      margin-top: 28px;
+      color: #fff;
+      font-weight: 600;
+      text-shadow: 1px 1px 0 #1e1e1e;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative Pixel Clouds -->
+  <div class="cloud" style="top: 40px; width: 130px; animation-duration: 42s;"></div>
+  <div class="cloud" style="top: 110px; width: 180px; animation-duration: 58s; animation-delay: -15s;"></div>
+  <div class="cloud" style="top: 190px; width: 110px; animation-duration: 36s; animation-delay: -8s;"></div>
+
+  <div class="container">
+    <!-- TOP HUD -->
+    <div class="hud-bar" id="topHud" style="display:none;">
+      <div class="player-badge">
+        <div class="avatar-box" id="hudAvatar">🧱</div>
+        <div>
+          <div style="font-weight:700; font-size:1.1rem;" id="hudName">Petualang</div>
+          <div style="font-size:0.82rem; color:#80deea;" id="hudTitle">Lv. 1 — Pemula Kayu</div>
+          <div class="xp-wrap"><div class="xp-fill" id="hudXpBar"></div></div>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span style="background:#111; padding:6px 12px; border-radius:6px; border:2px solid #444; font-weight:700; color:#ffca28;">
+          ⭐ <span id="hudXpText">0</span> XP
+        </span>
+        <button class="mc-btn btn-stone" onclick="toggleMute()" id="muteBtn" title="Suara Efek">🔊</button>
+        <button class="mc-btn btn-gold" onclick="goScreen('lobby')">🏠 Lobby</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: LOGIN -->
+    <div class="screen active" id="screen-login">
+      <div class="mc-panel login-box">
+        <div style="font-size:3.2rem; margin-bottom:8px;">🛢️🧱✨</div>
+        <h1 class="pixel-font" style="font-size:1.25rem; color:#2e7d32; margin-bottom:10px;">JELAJAHI TABUNG</h1>
+        <p style="font-weight:600; color:#5d4037;">Petualangan Bangun Ruang Sisi Lengkung Kelas 8 SMP</p>
+        <input type="text" id="usernameInput" class="login-input" placeholder="Ketik nama panggilanmu..." maxlength="18" />
+        <button class="mc-btn btn-green" style="width:100%; font-size:1.15rem;" onclick="startGame()">▶ MULAI PETUALANGAN</button>
+        <p style="font-size:0.82rem; color:#6d4c41; margin-top:12px;">Tanpa kata sandi • Progres otomatis tersimpan di browser ini</p>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: LOBBY -->
+    <div class="screen" id="screen-lobby">
+      <div class="mc-panel" style="margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div>
+          <h2 style="color:#2e7d32;">Selamat Datang di Desa Silinder! 🌲</h2>
+          <p style="font-size:0.95rem;">Pilih portal di bawah untuk belajar rumus, bereksperimen di lab, atau kalahkan Raja Balok!</p>
+        </div>
+        <button class="mc-btn btn-red" style="padding:8px 14px; font-size:0.85rem;" onclick="logoutPlayer()">Ganti Pemain</button>
+      </div>
+
+      <div class="lobby-grid">
+        <div class="menu-card" onclick="goScreen('belajar')">
+          <div>
+            <div class="menu-icon">📖</div>
+            <h3>1. BELAJAR MATERI</h3>
+            <p style="font-size:0.92rem; color:#5d4037; margin-top:6px;">Pahami unsur tabung, jaring-jaring, luas permukaan, volume, hingga jebakan soal yang sering salah.</p>
+          </div>
+          <span class="tag-pill" id="tagBelajar">0 / 6 Bab Selesai</span>
+        </div>
+
+        <div class="menu-card" onclick="goScreen('lab')">
+          <div>
+            <div class="menu-icon">🔬</div>
+            <h3>2. LAB TABUNG 3D</h3>
+            <p style="font-size:0.92rem; color:#5d4037; margin-top:6px;">Geser jari-jari & tinggi secara langsung, serta buka-tutup jaring-jaring tabung tanpa takut salah!</p>
+          </div>
+          <span class="tag-pill" style="background:#e1f5fe; color:#0277bd; border-color:#4fc3f7;">Eksplorasi Bebas</span>
+        </div>
+
+        <div class="menu-card" onclick="goScreen('latihan')">
+          <div>
+            <div class="menu-icon">✏️</div>
+            <h3>3. MISI LATIHAN</h3>
+            <p style="font-size:0.92rem; color:#5d4037; margin-top:6px;">6 soal cerita kontekstual lengkap dengan <b>Petunjuk Bertahap</b> dan penilaian Rank S, A, B, C.</p>
+          </div>
+          <span class="tag-pill" id="tagLatihan">0 / 6 Misi Tuntas</span>
+        </div>
+
+        <div class="menu-card" onclick="goScreen('boss')">
+          <div>
+            <div class="menu-icon">⚔️</div>
+            <h3>4. BOSS BATTLE</h3>
+            <p style="font-size:0.92rem; color:#5d4037; margin-top:6px;">Lawan 3 Bos Penjaga Tabung! Jawab cepat dan tepat untuk menyerang HP bos sebelum nyawamu habis.</p>
+          </div>
+          <span class="tag-pill" style="background:#ffebee; color:#c62828; border-color:#ef9a9a;" id="tagBoss">0 / 3 Bos Kalah</span>
+        </div>
+
+        <div class="menu-card" onclick="goScreen('trophy')">
+          <div>
+            <div class="menu-icon">🏆</div>
+            <h3>5. TROPHY & PROGRES</h3>
+            <p style="font-size:0.92rem; color:#5d4037; margin-top:6px;">Lihat koleksi 10 piala pencapaianmu, statistik belajar, dan kenaikan level petualangmu.</p>
+          </div>
+          <span class="tag-pill" style="background:#fff8e1; color:#f57f17; border-color:#ffd54f;" id="tagTrophy">0 / 10 Trophy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: BELAJAR -->
+    <div class="screen" id="screen-belajar">
+      <div class="mc-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h2>📖 Buku Panduan Tabung</h2>
+          <button class="mc-btn btn-stone" onclick="goScreen('lobby')">⬅ Kembali</button>
+        </div>
+        <div class="chapter-list" id="chapterButtons"></div>
+        <div id="chapterContent" style="background:#fffdf7; border:3px solid #d7ccc8; border-radius:10px; padding:20px;"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: LAB -->
+    <div class="screen" id="screen-lab">
+      <div class="mc-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h2>🔬 Laboratorium & Jaring-Jaring Tabung</h2>
+          <button class="mc-btn btn-stone" onclick="goScreen('lobby')">⬅ Kembali</button>
+        </div>
+        <div class="lab-layout">
+          <div class="canvas-stage">
+            <canvas id="labCanvas" width="340" height="320" style="max-width:100%;"></canvas>
+            <div style="margin-top:10px;">
+              <label style="font-weight:700;">Buka Jaring-Jaring: <span id="netVal">0</span>%</label>
+              <input type="range" id="netSlider" min="0" max="100" value="0" oninput="updateLab()">
+              <button class="mc-btn btn-blue" style="padding:8px 14px; font-size:0.9rem;" onclick="animateNet()">✨ Animasi Buka / Tutup</button>
+            </div>
+          </div>
+
+          <div>
+            <div style="background:#fffdf7; border:3px solid #8b5a2b; border-radius:10px; padding:16px;">
+              <label style="font-weight:700;">Jari-jari alas (r): <span id="rVal" style="color:#2e7d32;">7</span> cm</label>
+              <input type="range" id="rSlider" min="3" max="21" value="7" oninput="updateLab()">
+
+              <label style="font-weight:700;">Tinggi tabung (t): <span id="tVal" style="color:#0277bd;">10</span> cm</label>
+              <input type="range" id="tSlider" min="4" max="25" value="10" oninput="updateLab()">
+
+              <div style="background:#e8f5e9; border:2px solid #66bb6a; border-radius:8px; padding:12px; margin-top:8px;">
+                <p style="font-weight:700; margin-bottom:6px;">📊 Hasil Perhitungan Otomatis (<span id="piUsed">π = 22/7</span>):</p>
+                <p>• Diameter (d) = <b><span id="outD">14</span> cm</b></p>
+                <p>• Luas Alas = π × r² = <b><span id="outAlas">154</span> cm²</b></p>
+                <p>• Luas Selimut = 2 × π × r × t = <b><span id="outSelimut">440</span> cm²</b></p>
+                <p>• Luas Permukaan = 2πr(r + t) = <b><span id="outLP">748</span> cm²</b></p>
+                <p style="color:#1b5e20; font-size:1.08rem; margin-top:4px;">• Volume = π × r² × t = <b><span id="outVol">1.540</span> cm³</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: LATIHAN -->
+    <div class="screen" id="screen-latihan">
+      <div class="mc-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h2>✏️ Misi Latihan Bertahap</h2>
+          <button class="mc-btn btn-stone" onclick="goScreen('lobby')">⬅ Kembali</button>
+        </div>
+        <div id="questSelector" class="chapter-list"></div>
+        <div id="questArena" style="background:#fffdf7; border:3px solid #8b5a2b; border-radius:10px; padding:20px;"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6: BOSS BATTLE -->
+    <div class="screen" id="screen-boss">
+      <div class="mc-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h2>⚔️ Arena Boss Silinder</h2>
+          <button class="mc-btn btn-stone" onclick="goScreen('lobby')">⬅ Kembali</button>
+        </div>
+        <div id="bossSelectArea"></div>
+        <div id="bossFightArea" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 7: TROPHY -->
+    <div class="screen" id="screen-trophy">
+      <div class="mc-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <h2>🏆 Ruang Trophy & Statistik</h2>
+          <button class="mc-btn btn-stone" onclick="goScreen('lobby')">⬅ Kembali</button>
+        </div>
+        <div style="background:#fffdf7; border:3px solid #8b5a2b; border-radius:10px; padding:14px; margin-bottom:16px; display:flex; flex-wrap:wrap; gap:20px;">
+          <div><b>Pemain:</b> <span id="statName">-</span></div>
+          <div><b>Total XP:</b> <span id="statXp">0</span></div>
+          <div><b>Bab Dibaca:</b> <span id="statBab">0</span>/6</div>
+          <div><b>Misi Selesai:</b> <span id="statMisi">0</span>/6</div>
+          <div><b>Bos Dikalahkan:</b> <span id="statBoss">0</span>/3</div>
+        </div>
+        <div class="trophy-grid" id="trophyList"></div>
+      </div>
+    </div>
+
+    <footer>
+      Jelajahi Tabung • Media Pembelajaran Matematika Kelas 8 SMP
+    </footer>
+  </div>
+
+  <div class="toast" id="toastBox">Notifikasi</div>
+
+  <script>
+    // ================= AUDIO SYNTH (WEB AUDIO API) =================
+    let isMuted = false;
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let actx = null;
+
+    function playSound(type) {
+      if (isMuted) return;
+      try {
+        if (!actx) actx = new AudioCtx();
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        const now = actx.currentTime;
+
+        if (type === 'click') {
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(520, now);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now); osc.stop(now + 0.08);
+        } else if (type === 'win') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523, now);
+          osc.frequency.setValueAtTime(659, now + 0.1);
+          osc.frequency.setValueAtTime(784, now + 0.2);
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+          osc.start(now); osc.stop(now + 0.4);
+        } else if (type === 'hit') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.exponentialRampToValueAtTime(60, now + 0.22);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+          osc.start(now); osc.stop(now + 0.22);
+        }
+      } catch (e) {}
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      document.getElementById('muteBtn').textContent = isMuted ? '🔇' : '🔊';
+    }
+
+    // ================= DATA & STATE =================
+    const LEVELS = [
+      "Pemula Kayu", "Penambang Batu", "Perajin Besi", "Penjelajah Emas",
+      "Ksatria Berlian", "Ahli Redstone", "Arsitek Silinder", "Penjaga Nether",
+      "Master Geometri", "Legenda Tabung"
+    ];
+
+    const CHAPTERS = [
+      {
+        title: "Bab 1: Mengenal Tabung",
+        content: `<h3>🛢️ Apa itu Tabung?</h3>
+        <p style="margin-top:8px;">Tabung adalah bangun ruang sisi lengkung yang dibatasi oleh <b>dua bidang lingkaran yang sejajar dan kongruen</b> (sama bentuk dan ukurannya) sebagai alas dan tutup, serta <b>satu bidang lengkung</b> yang disebut selimut tabung.</p>
+        <p style="margin-top:10px;"><b>Contoh benda berbentuk tabung di sekitar kita:</b> kaleng susu, drum air, pipa paralon, baterai, dan celengan silinder.</p>`
+      },
+      {
+        title: "Bab 2: Unsur-Unsur Tabung",
+        content: `<h3>🔍 Bagian Utama Tabung</h3>
+        <ul style="margin:10px 0 0 20px; line-height:1.8;">
+          <li><b>Sisi Alas & Sisi Tutup:</b> Berbentuk lingkaran yang sama besar (2 sisi datar).</li>
+          <li><b>Selimut Tabung:</b> Sisi lengkung yang menyelimuti bagian samping tabung (1 sisi lengkung).</li>
+          <li><b>Rusuk Tabung:</b> Memiliki <b>2 rusuk lengkung</b> (pertemuan alas dengan selimut, dan tutup dengan selimut).</li>
+          <li><b>Jari-jari (r) & Diameter (d):</b> Jarak dari pusat lingkaran ke tepi lingkaran (<i>d = 2 × r</i>).</li>
+          <li><b>Tinggi Tabung (t):</b> Jarak tegak lurus antara bidang alas dan bidang tutup.</li>
+        </ul>
+        <p style="margin-top:10px; background:#fff3e0; padding:10px; border-radius:6px;">💡 <b>Ingat:</b> Tabung <b>tidak memiliki titik sudut</b>!</p>`
+      },
+      {
+        title: "Bab 3: Jaring-Jaring Tabung",
+        content: `<h3>📐 Jika Tabung Dibuka...</h3>
+        <p style="margin-top:8px;">Ketika tabung digunting sepanjang tinggi dan keliling alas/tutupnya, jaring-jaringnya terdiri dari:</p>
+        <ul style="margin:10px 0 0 20px; line-height:1.8;">
+          <li><b>2 buah lingkaran</b> (alas dan tutup) dengan jari-jari <i>r</i>.</li>
+          <li><b>1 buah persegi panjang</b> (selimut tabung) dengan:
+            <br>— Panjang = Keliling lingkaran alas = <b>2 × π × r</b>
+            <br>— Lebar = Tinggi tabung = <b>t</b>
+          </li>
+        </ul>
+        <p style="margin-top:10px;">Coba buktikan sendiri di menu <b>Lab Tabung 3D</b>!</p>`
+      },
+      {
+        title: "Bab 4: Luas Permukaan",
+        content: `<h3>🎨 Menghitung Luas Permukaan Tabung</h3>
+        <p style="margin-top:8px;">Luas permukaan tabung adalah jumlah luas seluruh jaring-jaringnya:</p>
+        <div class="formula-box">
+          Luas Selimut = 2 × π × r × t<br>
+          Luas Permukaan Lengkap = 2 × π × r × (r + t)
+        </div>
+        <p><b>Catatan Khusus:</b> Jika soal menyebut <b>tabung tanpa tutup</b> (misalnya gelas atau ember), rumusnya menjadi:</p>
+        <div class="formula-box" style="background:#37474f; border-color:#ffca28; color:#ffca28;">
+          Luas Tanpa Tutup = (π × r²) + (2 × π × r × t)
+        </div>`
+      },
+      {
+        title: "Bab 5: Volume Tabung",
+        content: `<h3>💧 Menghitung Volume (Isi) Tabung</h3>
+        <p style="margin-top:8px;">Sama seperti prisma, volume tabung diperoleh dari <b>Luas Alas × Tinggi</b>:</p>
+        <div class="formula-box">
+          Volume (V) = π × r² × t
+        </div>
+        <p><b>Tips Memilih Nilai π:</b></p>
+        <ul style="margin:8px 0 0 20px; line-height:1.7;">
+          <li>Gunakan <b>π = 22/7</b> jika <i>r</i> atau <i>t</i> merupakan kelipatan 7 (7, 14, 21, 28, dst).</li>
+          <li>Gunakan <b>π = 3,14</b> jika bukan kelipatan 7 (misalnya 5, 10, 20).</li>
+        </ul>`
+      },
+      {
+        title: "Bab 6: Awas Salah Kaprah!",
+        content: `<h3>⚠️ 3 Jebakan Paling Sering di Soal Kelas 8</h3>
+        <ol style="margin:10px 0 0 20px; line-height:1.8;">
+          <li><b>Diameter dianggap Jari-jari:</b> Jika soal menulis <i>"diameter 14 cm"</i>, jangan langsung masukkan 14 ke rumus! Bagi dua dulu menjadi <b>r = 7 cm</b>.</li>
+          <li><b>Lupa Kondisi Tanpa Tutup:</b> Kata kunci seperti <i>"gelas", "cangkir", "drum terbuka",</i> atau <i>"kaleng tanpa tutup"</i> hanya memakai <b>1 lingkaran alas</b>, bukan 2.</li>
+          <li><b>Satuan Berbeda:</b> Jika jari-jari dalam <b>cm</b> dan tinggi dalam <b>meter</b> (atau jawaban diminta dalam <b>liter / dm³</b>), samakan satuannya terlebih dahulu! (1 liter = 1.000 cm³).</li>
+        </ol>`
+      }
+    ];
+
+    const QUESTS = [
+      {
+        id: 0, title: "Misi 1: Kaleng Biskuit", diff: "Mudah",
+        story: "Sebuah kaleng biskuit berbentuk tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Berapakah volume kaleng biskuit tersebut? (π = 22/7)",
+        hints: [
+          "Petunjuk 1: Gunakan rumus Volume Tabung: V = π × r² × t.",
+          "Petunjuk 2: Karena r = 7 cm (kelipatan 7), pakai π = 22/7. Hitung (22/7) × 7 × 7 × 10."
+        ],
+        options: ["440 cm³", "748 cm³", "1.540 cm³", "3.080 cm³"],
+        answer: 2
+      },
+      {
+        id: 1, title: "Misi 2: Label Kaleng Susu", diff: "Mudah",
+        story: "Pabrik minuman ingin menempelkan kertas label mengelilingi bagian samping (selimut) kaleng berjari-jari 10 cm dan tinggi 15 cm. Berapa luas kertas label yang dibutuhkan? (π = 3,14)",
+        hints: [
+          "Petunjuk 1: Kertas label hanya menutupi selimut tabung, bukan alas dan tutupnya.",
+          "Petunjuk 2: Luas Selimut = 2 × π × r × t = 2 × 3,14 × 10 × 15."
+        ],
+        options: ["471 cm²", "942 cm²", "1.570 cm²", "4.710 cm²"],
+        answer: 1
+      },
+      {
+        id: 2, title: "Misi 3: Jebakan Diameter", diff: "Menengah",
+        story: "Sebuah drum minyak memiliki diameter 14 dm dan tinggi 10 dm. Berapa liter minyak maksimal yang dapat ditampung drum tersebut? (1 dm³ = 1 liter, π = 22/7)",
+        hints: [
+          "Petunjuk 1: Hati-hati! Yang diketahui adalah diameter (d = 14 dm), ubah dulu menjadi jari-jari (r = d ÷ 2).",
+          "Petunjuk 2: Setelah dapat r = 7 dm, hitung V = (22/7) × 7² × 10."
+        ],
+        options: ["6.160 liter", "1.540 liter", "440 liter", "770 liter"],
+        answer: 1
+      },
+      {
+        id: 3, title: "Misi 4: Gelas Tanpa Tutup", diff: "Menengah",
+        story: "Pengrajin membuat gelas kaca berbentuk tabung tanpa tutup dengan jari-jari 7 cm dan tinggi 10 cm. Berapa luas kaca yang diperlukan untuk membuat 1 gelas? (π = 22/7)",
+        hints: [
+          "Petunjuk 1: Gelas tidak memiliki tutup! Jadi luasnya = Luas 1 Lingkaran Alas + Luas Selimut.",
+          "Petunjuk 2: Hitung (22/7 × 7²) + (2 × 22/7 × 7 × 10) = 154 + 440."
+        ],
+        options: ["748 cm²", "594 cm²", "440 cm²", "1.540 cm²"],
+        answer: 1
+      },
+      {
+        id: 4, title: "Misi 5: Tangki Air Desa", diff: "Sulit",
+        story: "Sebuah tangki air silinder berjari-jari 70 cm terisi penuh sebanyak 1.540 liter air. Berapakah tinggi tangki air tersebut? (1 liter = 1.000 cm³, π = 22/7)",
+        hints: [
+          "Petunjuk 1: Ubah dulu 1.540 liter menjadi cm³ → 1.540 × 1.000 = 1.540.000 cm³.",
+          "Petunjuk 2: Luas alas = (22/7) × 70 × 70 = 15.400 cm². Bagi Volume dengan Luas alas untuk mencari tinggi (t)."
+        ],
+        options: ["50 cm", "100 cm", "150 cm", "200 cm"],
+        answer: 1
+      },
+      {
+        id: 5, title: "Misi 6: Pengecatan Pilar", diff: "Sulit",
+        story: "Dua buah pilar taman berbentuk tabung dengan jari-jari 14 cm dan tinggi 200 cm akan dicat bagian selimutnya saja. Jika 1 kaleng cat kecil cukup untuk 17.600 cm², berapa kaleng cat yang dibutuhkan untuk kedua pilar? (π = 22/7)",
+        hints: [
+          "Petunjuk 1: Hitung luas selimut 1 pilar dulu: 2 × (22/7) × 14 × 200 = 17.600 cm².",
+          "Petunjuk 2: Karena ada DUA pilar, kalikan hasilnya dengan 2 lalu bagi dengan daya sebar 1 kaleng cat."
+        ],
+        options: ["1 kaleng", "2 kaleng", "3 kaleng", "4 kaleng"],
+        answer: 1
+      }
+    ];
+
+    const BOSSES = [
+      {
+        id: 0, name: "Slime Silinder Hijau", icon: "🟢", hp: 100, rewardXp: 60,
+        questions: [
+          { q: "Berapa banyak rusuk lengkung yang dimiliki oleh bangun ruang tabung?", opts: ["0", "1", "2", "3"], a: 2 },
+          { q: "Jika selimut tabung dibuka dan direntangkan, bangun datar apa yang terbentuk?", opts: ["Segitiga", "Persegi panjang", "Trapesium", "Lingkaran"], a: 1 },
+          { q: "Tabung dengan jari-jari 7 cm dan tinggi 5 cm memiliki volume sebesar... (π = 22/7)", opts: ["770 cm³", "220 cm³", "154 cm³", "385 cm³"], a: 0 }
+        ]
+      },
+      {
+        id: 1, name: "Golem Batu Pipa", icon: "🗿", hp: 120, rewardXp: 90,
+        questions: [
+          { q: "Diameter alas tabung adalah 20 cm. Berapakah panjang jari-jarinya?", opts: ["40 cm", "20 cm", "10 cm", "5 cm"], a: 2 },
+          { q: "Luas selimut tabung dengan r = 7 cm dan t = 10 cm adalah... (π = 22/7)", opts: ["154 cm²", "440 cm²", "748 cm²", "1.540 cm²"], a: 1 },
+          { q: "Rumus luas permukaan tabung lengkap (dengan alas dan tutup) adalah...", opts: ["πr²t", "2πrt", "2πr(r + t)", "πr(r + t)"], a: 2 }
+        ]
+      },
+      {
+        id: 2, name: "Naga Ender Silinder", icon: "🐉", hp: 150, rewardXp: 150,
+        questions: [
+          { q: "Volume tabung adalah 628 cm³ dan tingginya 8 cm (π = 3,14). Berapa jari-jarinya?", opts: ["5 cm", "10 cm", "25 cm", "4 cm"], a: 0 },
+          { q: "Sebuah pipa paralon terbuka kedua ujungnya memiliki r = 7 cm dan panjang 100 cm. Luas permukaannya adalah...", opts: ["4.400 cm²", "4.708 cm²", "4.554 cm²", "15.400 cm²"], a: 0 },
+          { q: "Jika jari-jari tabung diperbesar menjadi 2 kali lipat sedangkan tingginya tetap, volumenya menjadi...", opts: ["2 kali lipat", "3 kali lipat", "4 kali lipat", "8 kali lipat"], a: 2 }
+        ]
+      }
+    ];
+
+    const TROPHIES = [
+      { id: "first_step", icon: "🌱", name: "Langkah Pertama", desc: "Masuk ke Desa Silinder untuk pertama kalinya." },
+      { id: "reader_1", icon: "📘", name: "Pembaca Tekun", desc: "Membaca minimal 3 bab di menu Belajar." },
+      { id: "scholar", icon: "🎓", name: "Cendekiawan Tabung", desc: "Menyelesaikan seluruh 6 bab materi Belajar." },
+      { id: "lab_scientist", icon: "🔬", name: "Ilmuwan Lab", desc: "Bereksperimen membuka jaring-jaring di Lab Tabung." },
+      { id: "quest_starter", icon: "⚔️", name: "Pemburu Misi", desc: "Menyelesaikan minimal 1 misi di menu Latihan." },
+      { id: "rank_s", icon: "🌟", name: "Perfeksionis Rank S", desc: "Menyelesaikan misi tanpa memakai petunjuk." },
+      { id: "quest_master", icon: "🏅", name: "Penakluk Soal", desc: "Menuntaskan semua 6 misi Latihan." },
+      { id: "slime_slayer", icon: "🧪", name: "Pembasmi Slime", desc: "Mengalahkan Bos pertama di Boss Battle." },
+      { id: "dragon_hero", icon: "👑", name: "Pahlawan Silinder", desc: "Mengalahkan semua 3 Bos Penjaga Tabung." },
+      { id: "xp_500", icon: "💎", name: "Kolektor Berlian", desc: "Mengumpulkan total 500 XP atau lebih." }
+    ];
+
+    let state = {
+      name: "",
+      xp: 0,
+      readChapters: [],
+      completedQuests: {}, // { id: 'S' | 'A' | 'B' }
+      defeatedBosses: [],
+      unlockedTrophies: [],
+      usedLab: false
+    };
+
+    function saveState() {
+      if (!state.name) return;
+      localStorage.setItem("jelajahi_tabung_" + state.name.toLowerCase(), JSON.stringify(state));
+      checkTrophies();
+      updateHUD();
+    }
+
+    function loadState(playerName) {
+      const saved = localStorage.getItem("jelajahi_tabung_" + playerName.toLowerCase());
+      if (saved) {
+        state = JSON.parse(saved);
+      } else {
+        state = {
+          name: playerName,
+          xp: 20,
+          readChapters: [],
+          completedQuests: {},
+          defeatedBosses: [],
+          unlockedTrophies: [],
+          usedLab: false
+        };
+      }
+      saveState();
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById("toastBox");
+      box.textContent = msg;
+      box.classList.add("show");
+      setTimeout(() => box.classList.remove("show"), 3200);
+    }
+
+    function addXp(amount, reason) {
+      state.xp += amount;
+      showToast(`+${amount} XP! (${reason})`);
+      saveState();
+    }
+
+    function checkTrophies() {
+      const unlock = (id) => {
+        if (!state.unlockedTrophies.includes(id)) {
+          state.unlockedTrophies.push(id);
+          const t = TROPHIES.find(x => x.id === id);
+          if (t) showToast(`🏆 Trophy Terbuka: ${t.name}!`);
+        }
+      };
+
+      if (state.name) unlock("first_step");
+      if (state.readChapters.length >= 3) unlock("reader_1");
+      if (state.readChapters.length >= 6) unlock("scholar");
+      if (state.usedLab) unlock("lab_scientist");
+      const qCount = Object.keys(state.completedQuests).length;
+      if (qCount >= 1) unlock("quest_starter");
+      if (Object.values(state.completedQuests).includes("S")) unlock("rank_s");
+      if (qCount >= 6) unlock("quest_master");
+      if (state.defeatedBosses.includes(0)) unlock("slime_slayer");
+      if (state.defeatedBosses.length >= 3) unlock("dragon_hero");
+      if (state.xp >= 500) unlock("xp_500");
+    }
+
+    function updateHUD() {
+      const level = Math.min(10, Math.floor(state.xp / 80) + 1);
+      const xpInLevel = state.xp % 80;
+      document.getElementById("hudName").textContent = state.name;
+      document.getElementById("hudTitle").textContent = `Lv. ${level} — ${LEVELS[level - 1]}`;
+      document.getElementById("hudXpText").textContent = state.xp;
+      document.getElementById("hudXpBar").style.width = `${(xpInLevel / 80) * 100}%`;
+
+      document.getElementById("tagBelajar").textContent = `${state.readChapters.length} / 6 Bab Selesai`;
+      document.getElementById("tagLatihan").textContent = `${Object.keys(state.completedQuests).length} / 6 Misi Tuntas`;
+      document.getElementById("tagBoss").textContent = `${state.defeatedBosses.length} / 3 Bos Kalah`;
+      document.getElementById("tagTrophy").textContent = `${state.unlockedTrophies.length} / 10 Trophy`;
+    }
+
+    // ================= NAVIGATION =================
+    function startGame() {
+      const input = document.getElementById("usernameInput").value.trim();
+      if (input.length < 2) {
+        alert("Masukkan nama panggilan minimal 2 huruf ya!");
+        return;
+      }
+      playSound("win");
+      loadState(input);
+      document.getElementById("topHud").style.display = "flex";
+      goScreen("lobby");
+    }
+
+    function logoutPlayer() {
+      playSound("click");
+      document.getElementById("topHud").style.display = "none";
+      goScreen("login");
+    }
+
+    function goScreen(name) {
+      playSound("click");
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById("screen-" + name).classList.add("active");
+
+      if (name === "belajar") renderBelajar(0);
+      if (name === "lab") { state.usedLab = true; saveState(); updateLab(); }
+      if (name === "latihan") renderQuestSelector();
+      if (name === "boss") renderBossMenu();
+      if (name === "trophy") renderTrophies();
+    }
+
+    // ================= 1. BELAJAR =================
+    function renderBelajar(idx) {
+      const btnWrap = document.getElementById("chapterButtons");
+      btnWrap.innerHTML = CHAPTERS.map((ch, i) => `
+        <button class="chapter-btn ${i === idx ? 'active' : ''} ${state.readChapters.includes(i) ? 'done' : ''}" onclick="renderBelajar(${i})">
+          ${ch.title}
+        </button>
+      `).join("");
+
+      const ch = CHAPTERS[idx];
+      const alreadyRead = state.readChapters.includes(idx);
+      document.getElementById("chapterContent").innerHTML = `
+        ${ch.content}
+        <div style="margin-top:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <button class="mc-btn ${alreadyRead ? 'btn-stone' : 'btn-green'}" onclick="markChapterRead(${idx})">
+            ${alreadyRead ? '✅ Bab Sudah Dipelajari' : '⭐ Tandai Selesai (+25 XP)'}
+          </button>
+          ${idx < CHAPTERS.length - 1 ? `<button class="mc-btn btn-blue" onclick="renderBelajar(${idx + 1})">Bab Berikutnya ➡</button>` : ''}
+        </div>
+      `;
+    }
+
+    function markChapterRead(idx) {
+      if (!state.readChapters.includes(idx)) {
+        state.readChapters.push(idx);
+        playSound("win");
+        addXp(25, "Menyelesaikan Materi");
+        renderBelajar(idx);
+      }
+    }
+
+    // ================= 2. LAB TABUNG =================
+    let netAnimInterval = null;
+    function animateNet() {
+      playSound("click");
+      if (netAnimInterval) clearInterval(netAnimInterval);
+      const slider = document.getElementById("netSlider");
+      const target = parseInt(slider.value) < 50 ? 100 : 0;
+      netAnimInterval = setInterval(() => {
+        let cur = parseInt(slider.value);
+        if (cur === target) {
+          clearInterval(netAnimInterval);
+          return;
+        }
+        slider.value = cur < target ? cur + 4 : cur - 4;
+        updateLab();
+      }, 20);
+    }
+
+    function updateLab() {
+      const r = parseInt(document.getElementById("rSlider").value);
+      const t = parseInt(document.getElementById("tSlider").value);
+      const net = parseInt(document.getElementById("netSlider").value);
+
+      document.getElementById("rVal").textContent = r;
+      document.getElementById("tVal").textContent = t;
+      document.getElementById("netVal").textContent = net;
+
+      const isMultiple7 = (r % 7 === 0);
+      const pi = isMultiple7 ? (22 / 7) : 3.14;
+      document.getElementById("piUsed").textContent = isMultiple7 ? "π = 22/7" : "π = 3,14";
+
+      const d = r * 2;
+      const alas = pi * r * r;
+      const selimut = 2 * pi * r * t;
+      const lp = (2 * alas) + selimut;
+      const vol = alas * t;
+
+      const fmt = (n) => Number.isInteger(n) ? n.toLocaleString("id-ID") : n.toFixed(2).replace(".", ",");
+      document.getElementById("outD").textContent = d;
+      document.getElementById("outAlas").textContent = fmt(alas);
+      document.getElementById("outSelimut").textContent = fmt(selimut);
+      document.getElementById("outLP").textContent = fmt(lp);
+      document.getElementById("outVol").textContent = fmt(vol);
+
+      drawCylinderLab(r, t, net / 100);
+    }
+
+    function drawCylinderLab(r, t, openRatio) {
+      const canvas = document.getElementById("labCanvas");
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2 + 10;
+
+      if (openRatio < 0.15) {
+        // 2.5D Cylinder Mode
+        const rx = r * 4.5;
+        const ry = rx * 0.34;
+        const h = t * 6.5;
+        const topY = cy - h / 2;
+        const botY = cy + h / 2;
+
+        // Body
+        ctx.fillStyle = "#81c784";
+        ctx.strokeStyle = "#1b5e20";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx - rx, topY);
+        ctx.lineTo(cx - rx, botY);
+        ctx.ellipse(cx, botY, rx, ry, 0, Math.PI, 0, true);
+        ctx.lineTo(cx + rx, topY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Top Lid
+        ctx.fillStyle = "#a5d6a7";
+        ctx.beginPath();
+        ctx.ellipse(cx, topY, rx, ry, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Radius & Height Lines
+        ctx.strokeStyle = "#d32f2f";
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(cx, topY);
+        ctx.lineTo(cx + rx, topY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#1b5e20";
+        ctx.font = "bold 13px Fredoka";
+        ctx.fillText(`r = ${r} cm`, cx + 6, topY - 6);
+        ctx.fillText(`t = ${t} cm`, cx + rx + 8, cy);
+      } else {
+        // Unfolded Net Mode
+        const rectW = Math.min(250, (r * 7) * openRatio + 40);
+        const rectH = t * 5.2;
+        const circleR = Math.min(36, r * 2.1 * openRatio);
+
+        // Selimut Rectangle
+        ctx.fillStyle = "#81c784";
+        ctx.strokeStyle = "#1b5e20";
+        ctx.lineWidth = 3;
+        ctx.fillRect(cx - rectW / 2, cy - rectH / 2, rectW, rectH);
+        ctx.strokeRect(cx - rectW / 2, cy - rectH / 2, rectW, rectH);
+
+        // Top & Bottom Circles
+        ctx.fillStyle = "#ffca28";
+        ctx.beginPath();
+        ctx.arc(cx, cy - rectH / 2 - circleR - 4, circleR, 0, Math.PI * 2);
+        ctx.fill(); ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy + rectH / 2 + circleR + 4, circleR, 0, Math.PI * 2);
+        ctx.fill(); ctx.stroke();
+
+        ctx.fillStyle = "#1b5e20";
+        ctx.font = "bold 12px Fredoka";
+        ctx.textAlign = "center";
+        ctx.fillText(`Selimut: 2πr × t`, cx, cy + 4);
+        ctx.textAlign = "left";
+      }
+    }
+
+    // ================= 3. LATIHAN MISI =================
+    let currentQuestIdx = 0;
+    let hintLevel = 0;
+
+    function renderQuestSelector() {
+      const wrap = document.getElementById("questSelector");
+      wrap.innerHTML = QUESTS.map((q, i) => {
+        const rank = state.completedQuests[q.id];
+        return `
+          <button class="chapter-btn ${i === currentQuestIdx ? 'active' : ''}" onclick="loadQuest(${i})">
+            <div>${q.title}</div>
+            <small style="color:#5d4037;">Level: ${q.diff} ${rank ? `• <b>Rank ${rank}</b>` : ''}</small>
+          </button>
+        `;
+      }).join("");
+      loadQuest(currentQuestIdx);
+    }
+
+    function loadQuest(idx) {
+      currentQuestIdx = idx;
+      hintLevel = 0;
+      const q = QUESTS[idx];
+      document.querySelectorAll("#questSelector .chapter-btn").forEach((b, i) => {
+        b.classList.toggle("active", i === idx);
+      });
+
+      document.getElementById("questArena").innerHTML = `
+        <span class="tag-pill" style="margin-bottom:10px;">Tingkat: ${q.diff}</span>
+        <h3 style="margin-bottom:10px;">${q.title}</h3>
+        <p style="font-size:1.05rem; line-height:1.6; margin-bottom:14px;">${q.story}</p>
+        <div id="hintArea"></div>
+        <div style="margin-bottom:14px;">
+          <button class="mc-btn btn-gold" style="padding:8px 14px; font-size:0.9rem;" onclick="showHint()">💡 Minta Petunjuk (${hintLevel}/${q.hints.length})</button>
+        </div>
+        <div id="questOptions">
+          ${q.options.map((opt, i) => `<button class="option-btn" onclick="answerQuest(${i}, this)">${String.fromCharCode(65 + i)}. ${opt}</button>`).join("")}
+        </div>
+        <div id="questFeedback" style="margin-top:12px; font-weight:700;"></div>
+      `;
+    }
+
+    function showHint() {
+      const q = QUESTS[currentQuestIdx];
+      if (hintLevel < q.hints.length) {
+        playSound("click");
+        hintLevel++;
+        const area = document.getElementById("hintArea");
+        area.innerHTML += `<div style="background:#fff8e1; border-left:4px solid #ffb300; padding:10px; margin-bottom:8px; border-radius:4px;">${q.hints[hintLevel - 1]}</div>`;
+      }
+    }
+
+    function answerQuest(choiceIdx, btnEl) {
+      const q = QUESTS[currentQuestIdx];
+      const fb = document.getElementById("questFeedback");
+      if (choiceIdx === q.answer) {
+        btnEl.classList.add("correct");
+        playSound("win");
+        const rank = hintLevel === 0 ? "S" : (hintLevel === 1 ? "A" : "B");
+        const xpGain = rank === "S" ? 50 : (rank === "A" ? 35 : 25);
+        fb.style.color = "#2e7d32";
+        fb.innerHTML = `🎉 Jawaban Benar! Kamu meraih <b>Rank ${rank}</b>!`;
+        if (!state.completedQuests[q.id] || rank === "S") {
+          state.completedQuests[q.id] = rank;
+        }
+        addXp(xpGain, `Misi Rank ${rank}`);
+        renderQuestSelector();
+      } else {
+        btnEl.classList.add("wrong");
+        playSound("hit");
+        fb.style.color = "#c62828";
+        fb.innerHTML = `❌ Belum tepat! Coba cek lagi rumusnya atau gunakan tombol Petunjuk.`;
+      }
+    }
+
+    // ================= 4. BOSS BATTLE =================
+    let activeBoss = null;
+    let bossHp = 100;
+    let playerHp = 100;
+    let bossQIdx = 0;
+
+    function renderBossMenu() {
+      document.getElementById("bossFightArea").style.display = "none";
+      const area = document.getElementById("bossSelectArea");
+      area.style.display = "grid";
+      area.className = "lobby-grid";
+      area.innerHTML = BOSSES.map((b, i) => {
+        const beaten = state.defeatedBosses.includes(b.id);
+        return `
+          <div class="menu-card" style="text-align:center;">
+            <div style="font-size:3.5rem;">${b.icon}</div>
+            <h3>${b.name}</h3>
+            <p style="font-size:0.9rem; margin:6px 0;">HP Bos: ${b.hp} • Hadiah: +${b.rewardXp} XP</p>
+            <button class="mc-btn ${beaten ? 'btn-green' : 'btn-red'}" style="margin-top:10px;" onclick="startBoss(${i})">
+              ${beaten ? '✅ Tantang Ulang' : '⚔️ Lawan Bos'}
+            </button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function startBoss(idx) {
+      playSound("click");
+      activeBoss = BOSSES[idx];
+      bossHp = activeBoss.hp;
+      playerHp = 100;
+      bossQIdx = 0;
+      document.getElementById("bossSelectArea").style.display = "none";
+      document.getElementById("bossFightArea").style.display = "block";
+      renderBossTurn();
+    }
+
+    function renderBossTurn() {
+      const fight = document.getElementById("bossFightArea");
+      if (bossHp <= 0) {
+        playSound("win");
+        if (!state.defeatedBosses.includes(activeBoss.id)) {
+          state.defeatedBosses.push(activeBoss.id);
+        }
+        addXp(activeBoss.rewardXp, `Mengalahkan ${activeBoss.name}`);
+        fight.innerHTML = `
+          <div style="text-align:center; padding:20px;">
+            <div style="font-size:4rem;">🏆🎉</div>
+            <h2 style="color:#2e7d32;">KEMENANGAN MUTLAK!</h2>
+            <p style="margin:10px 0;">Kamu berhasil mengalahkan <b>${activeBoss.name}</b> dan mengamankan wilayah Silinder!</p>
+            <button class="mc-btn btn-gold" onclick="renderBossMenu()">Kembali ke Daftar Bos</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (playerHp <= 0) {
+        playSound("hit");
+        fight.innerHTML = `
+          <div style="text-align:center; padding:20px;">
+            <div style="font-size:4rem;">💔😵</div>
+            <h2 style="color:#c62828;">HP Kamu Habis!</h2>
+            <p style="margin:10px 0;">Pelajari lagi rumus tabung di Buku Panduan, lalu tantang kembali bos ini!</p>
+            <button class="mc-btn btn-blue" onclick="renderBossMenu()">Coba Lagi</button>
+          </div>
+        `;
+        return;
+      }
+
+      const qObj = activeBoss.questions[bossQIdx % activeBoss.questions.length];
+      fight.innerHTML = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+          <div style="background:#e8f5e9; padding:12px; border-radius:8px; border:2px solid #4caf50;">
+            <b>🧱 ${state.name} (Kamu)</b>
+            <div class="hp-bar"><div class="hp-fill-player" style="width:${playerHp}%"></div></div>
+            <small>HP: ${playerHp} / 100</small>
+          </div>
+          <div style="background:#ffebee; padding:12px; border-radius:8px; border:2px solid #ef5350;">
+            <b>${activeBoss.icon} ${activeBoss.name}</b>
+            <div class="hp-bar"><div class="hp-fill-boss" style="width:${(bossHp / activeBoss.hp) * 100}%"></div></div>
+            <small>HP: ${Math.max(0, bossHp)} / ${activeBoss.hp}</small>
+          </div>
+        </div>
+        <div style="background:#fffdf7; border:3px solid #8b5a2b; border-radius:10px; padding:18px;">
+          <h4 style="margin-bottom:10px;">Serangan Soal #${bossQIdx + 1}:</h4>
+          <p style="font-size:1.08rem; font-weight:600; margin-bottom:12px;">${qObj.q}</p>
+          ${qObj.opts.map((o, i) => `<button class="option-btn" onclick="attackBoss(${i})">${o}</button>`).join("")}
+        </div>
+      `;
+    }
+
+    function attackBoss(choice) {
+      const qObj = activeBoss.questions[bossQIdx % activeBoss.questions.length];
+      const dmgToBoss = Math.ceil(activeBoss.hp / activeBoss.questions.length);
+      if (choice === qObj.a) {
+        playSound("win");
+        bossHp -= dmgToBoss;
+        showToast(`⚔️ Serangan Kritis! Bos terkena -${dmgToBoss} HP!`);
+      } else {
+        playSound("hit");
+        playerHp -= 35;
+        showToast(`💥 Jawaban Salah! Bos menyerang balik -35 HP!`);
+      }
+      bossQIdx++;
+      renderBossTurn();
+    }
+
+    // ================= 5. TROPHY =================
+    function renderTrophies() {
+      document.getElementById("statName").textContent = state.name;
+      document.getElementById("statXp").textContent = state.xp;
+      document.getElementById("statBab").textContent = state.readChapters.length;
+      document.getElementById("statMisi").textContent = Object.keys(state.completedQuests).length;
+      document.getElementById("statBoss").textContent = state.defeatedBosses.length;
+
+      document.getElementById("trophyList").innerHTML = TROPHIES.map(t => {
+        const isUnlocked = state.unlockedTrophies.includes(t.id);
+        return `
+          <div class="trophy-card ${isUnlocked ? 'unlocked' : ''}">
+            <div style="font-size:2rem; margin-bottom:6px;">${isUnlocked ? t.icon : '🔒'}</div>
+            <div style="font-weight:700;">${t.name}</div>
+            <p style="font-size:0.85rem; margin-top:4px;">${t.desc}</p>
+          </div>
+        `;
+      }).join("");
+    }
+  </script>
+</body>
+</html>
