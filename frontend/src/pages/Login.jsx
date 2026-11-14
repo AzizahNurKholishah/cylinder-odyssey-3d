@@ -4,6 +4,7 @@ import { ArrowRight, KeyRound } from 'lucide-react'
 import { Logo, Tubi } from '../components/Brand.jsx'
 import { Button, ErrorBox } from '../components/ui/index.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import { IS_STANDALONE } from '../lib/api.js'
 
 const CODE_RE = /^[A-Z0-9]{2,8}-[A-Z0-9]{1,6}$/
 
@@ -29,7 +30,10 @@ export default function Login() {
     setLoading(true)
     try {
       const profile = await login(c, needKey ? accessKey : undefined)
-      const dest = location.state?.from || (profile.role === 'teacher' ? '/admin' : '/dashboard')
+      const home = profile.role === 'teacher' ? '/admin' : '/dashboard'
+      const from = location.state?.from
+      // kembali ke halaman yang diminta hanya jika cocok dengan peran (guru tidak dikirim ke halaman siswa sebelumnya)
+      const dest = from && (profile.role === 'teacher') === from.startsWith('/admin') ? from : home
       navigate(dest, { replace: true })
     } catch (err) {
       if (err.code === 'access_key_required') {
@@ -88,6 +92,7 @@ export default function Login() {
             {loading ? 'Memeriksa kode...' : 'Masuk Petualangan'}
           </Button>
           <p className="mt-4 text-center text-sm text-slate-500">Belum punya kode? Tanyakan kepada guru matematikamu.</p>
+          {IS_STANDALONE && <p className="mt-2 text-center text-xs text-slate-400">Progres belajarmu tersimpan di perangkat ini. Gunakan perangkat yang sama agar progres tidak hilang.</p>}
         </form>
       </div>
     </div>

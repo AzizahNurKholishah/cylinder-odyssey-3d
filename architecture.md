@@ -2,6 +2,14 @@
 
 ## Gambaran Umum
 
+Aplikasi punya dua mode yang dipilih saat build:
+
+- **Standalone (default):** `frontend/src/lib/engine/` (grading.js, localApi.js) menjalankan seluruh logika backend di perangkat, dengan penyimpanan `localStorage`. Konten soal/kunci/nilai jebakan berasal dari `src/content/generated/content.json`, hasil ekspor `backend/scripts/export_content.py`. Tes `test_frontend_content_export_is_up_to_date` memastikan keduanya selalu sinkron.
+- **Server:** diagram di bawah ini.
+
+`frontend/src/lib/api.js` memilih implementasi: `VITE_API_URL` kosong → API lokal; diisi → HTTP ke FastAPI. Bentuk respons keduanya identik.
+
+
 ```
 ┌────────────────────────────┐        HTTPS/JSON         ┌──────────────────────────┐      REST (service key)     ┌──────────────────────┐
 │ Frontend (React + Vite)    │  ───────────────────────▶ │ Backend (FastAPI)        │ ─────────────────────────▶  │ Supabase PostgreSQL  │

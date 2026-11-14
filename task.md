@@ -32,6 +32,15 @@
 - [ ] Uji koneksi ke proyek Supabase sungguhan (butuh kredensial proyek)
 - [ ] Uji sentuh di perangkat Android fisik
 
+## Mode Standalone ✅
+- [x] Konten diekspor dari Python ke `frontend/src/content/generated/content.json` (+ tes sinkronisasi)
+- [x] Port grading, deteksi kesalahan, hint, skor parsial, XP, misi, lencana, panel guru ke JavaScript (`src/lib/engine/`)
+- [x] Penyimpanan `localStorage` per kode siswa; 31 akun contoh bawaan
+- [x] 22 tes vitest yang meniru skenario tes backend
+- [x] E2E browser lulus tanpa server (semua level, lab, latihan, 5 game, Final Challenge, profil, guru)
+- [x] Perbaikan: setelah Keluar, pengguna berikutnya tidak diarahkan ke halaman milik pengguna sebelumnya
+- [x] GitHub Pages berjalan standalone
+
 ## Catatan untuk Peneliti
 - Soal Final Challenge & rubrik kata kunci adalah draf pengembang; perlu validasi ahli terhadap kisi-kisi asli.
 - Transkrip wawancara S01 tidak ada di repositori; pemetaan hanya memakai kode temuan dari spesifikasi.

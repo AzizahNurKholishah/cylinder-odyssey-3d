@@ -1,5 +1,9 @@
 # Deployment
 
+> **Mode standalone (default):** tidak perlu Supabase maupun backend. Setiap push ke `main` otomatis menjalankan tes lalu menerbitkan aplikasi ke GitHub Pages: <https://azizahnurkholishah.github.io/cylinder-odyssey-3d/>. Untuk APK, cukup `npm run build && npx cap sync android` lalu build di Android Studio, tanpa perlu mengisi `VITE_API_URL`.
+>
+> Bagian di bawah hanya untuk **mode server** (opsional).
+
 ## 1. Supabase
 1. Buat proyek di <https://supabase.com>.
 2. Buka **SQL Editor** → jalankan isi `supabase/schema.sql`, lalu `supabase/seed.sql`.

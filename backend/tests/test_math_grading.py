@@ -76,3 +76,9 @@ def test_invalid_and_empty_inputs():
     assert grade_step(step, "")["error_type"] == "empty"
     assert grade_step(step, "seratus")["error_type"] == "invalid_input"
     assert grade_step(step, "999")["error_type"] == "calculation"
+
+
+def test_frontend_content_export_is_up_to_date():
+    """frontend/src/content/generated/content.json harus sinkron dengan konten Python."""
+    from scripts.export_content import OUT, render
+    assert OUT.read_text(encoding="utf-8") == render(), "Jalankan: python scripts/export_content.py"

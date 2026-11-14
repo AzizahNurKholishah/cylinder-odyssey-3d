@@ -1,4 +1,9 @@
-const BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '')
+import { localAPI, setLocalToken } from './engine/localApi.js'
+
+// Tanpa VITE_API_URL → mode STANDALONE (semua di perangkat, data di localStorage).
+// Dengan VITE_API_URL → mode server (FastAPI + Supabase).
+const BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
+export const IS_STANDALONE = !BASE
 const TOKEN_KEY = 'co3d_token'
 
 export const tokenStore = {
@@ -48,7 +53,7 @@ export async function api(path, { method = 'GET', body } = {}) {
   return data
 }
 
-export const API = {
+const remoteAPI = {
   login: (student_code, access_key) => api('/auth/login', { method: 'POST', body: { student_code, access_key } }),
   me: () => api('/auth/me'),
   dashboard: () => api('/me/dashboard'),
@@ -68,3 +73,21 @@ export const API = {
   adminStudents: () => api('/admin/students'),
   adminCreateStudent: (payload) => api('/admin/students', { method: 'POST', body: payload }),
 }
+
+/** Bungkus API lokal: sertakan token sesi & samakan perilaku error dengan mode server. */
+function wrapLocal(apiObj) {
+  return Object.fromEntries(Object.entries(apiObj).map(([name, fn]) => [name, async (...args) => {
+    setLocalToken(tokenStore.get())
+    try {
+      return await fn(...args)
+    } catch (e) {
+      if (e.status === 401 && name !== 'login' && tokenStore.get()) {
+        tokenStore.clear()
+        window.dispatchEvent(new Event('auth:expired'))
+      }
+      throw new ApiError(e.status ?? 500, e.code ?? 'error', e.message || 'Terjadi kesalahan. Coba lagi.')
+    }
+  }]))
+}
+
+export const API = IS_STANDALONE ? wrapLocal(localAPI) : remoteAPI

@@ -1,0 +1,2385 @@
+{
+ "_note": "DIHASILKAN OTOMATIS dari backend/app/content — jangan edit manual. Jalankan: python backend/scripts/export_content.py",
+ "lessons": [
+  {
+   "id": 1,
+   "level_number": 1,
+   "slug": "lembah-lingkaran",
+   "order_index": 1,
+   "title": "Lembah Lingkaran",
+   "description": "Prasyarat lingkaran (r, d, keliling, luas, pilihan π) dan unsur-unsur tabung."
+  },
+  {
+   "id": 2,
+   "level_number": 2,
+   "slug": "bengkel-jaring",
+   "order_index": 2,
+   "title": "Bengkel Jaring-Jaring",
+   "description": "Membentangkan tabung dan menemukan asal angka 2 pada rumus 2πr(r + t)."
+  },
+  {
+   "id": 3,
+   "level_number": 3,
+   "slug": "benteng-terbuka",
+   "order_index": 3,
+   "title": "Benteng Tabung Terbuka",
+   "description": "Membedakan tabung tertutup, tanpa tutup, dan selimut saja."
+  },
+  {
+   "id": 4,
+   "level_number": 4,
+   "slug": "puncak-literasi",
+   "order_index": 4,
+   "title": "Puncak Literasi Tabung",
+   "description": "Strategi 4 langkah menyelesaikan soal cerita kontekstual."
+  }
+ ],
+ "games": [
+  {
+   "id": 1,
+   "slug": "part-detector",
+   "title": "Part Detector",
+   "description": "Tebak kombinasi bagian permukaan benda nyata secepat mungkin."
+  },
+  {
+   "id": 2,
+   "slug": "radius-pi-sprint",
+   "title": "Radius & Pi Sprint",
+   "description": "Ubah diameter ke jari-jari dan pilih π paling efisien."
+  },
+  {
+   "id": 3,
+   "slug": "net-matcher",
+   "title": "Net Matcher",
+   "description": "Pilih selimut persegi panjang yang pas untuk tabung."
+  },
+  {
+   "id": 4,
+   "slug": "formula-builder",
+   "title": "Formula Builder Challenge",
+   "description": "Susun blok rumus dan substitusi dalam urutan yang benar."
+  },
+  {
+   "id": 5,
+   "slug": "cylinder-quest",
+   "title": "Cylinder Quest Adventure",
+   "description": "Bantu arsitek desa membuka 3 gerbang dengan luas permukaan tabung."
+  }
+ ],
+ "achievements": [
+  {
+   "id": 1,
+   "code": "circle_guardian",
+   "title": "Circle Guardian",
+   "icon_name": "circle-dot",
+   "description": "Menuntaskan prasyarat lingkaran & unsur tabung (Level 01)."
+  },
+  {
+   "id": 2,
+   "code": "net_unfolder",
+   "title": "Net Unfolder",
+   "icon_name": "layers",
+   "description": "Membentangkan jaring-jaring 3D hingga 100% di Cylinder Laboratory."
+  },
+  {
+   "id": 3,
+   "code": "formula_architect",
+   "title": "Formula Architect",
+   "icon_name": "sigma",
+   "description": "Menemukan asal rumus 2πr(r + t) (Level 02)."
+  },
+  {
+   "id": 4,
+   "code": "open_top_specialist",
+   "title": "Open-Top Specialist",
+   "icon_name": "cup-soda",
+   "description": "Menuntaskan misi tabung tanpa tutup (Level 03)."
+  },
+  {
+   "id": 5,
+   "code": "hint_free_solver",
+   "title": "Hint-Free Solver",
+   "icon_name": "zap",
+   "description": "Menjawab benar 5 soal latihan tanpa membuka petunjuk."
+  },
+  {
+   "id": 6,
+   "code": "playground_explorer",
+   "title": "Playground Explorer",
+   "icon_name": "gamepad-2",
+   "description": "Memainkan kelima mini games di Cylinder Playground."
+  },
+  {
+   "id": 7,
+   "code": "literacy_champion",
+   "title": "Literacy Champion",
+   "icon_name": "trophy",
+   "description": "Menyelesaikan Evaluasi Akhir Mathematical Literacy."
+  }
+ ],
+ "profiles": [
+  {
+   "student_code": "SMP8-01",
+   "full_name": "Siswa 01",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-02",
+   "full_name": "Siswa 02",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-03",
+   "full_name": "Siswa 03",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-04",
+   "full_name": "Siswa 04",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-05",
+   "full_name": "Siswa 05",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-06",
+   "full_name": "Siswa 06",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-07",
+   "full_name": "Siswa 07",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-08",
+   "full_name": "Siswa 08",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-09",
+   "full_name": "Siswa 09",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-10",
+   "full_name": "Siswa 10",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-11",
+   "full_name": "Siswa 11",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-12",
+   "full_name": "Siswa 12",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-13",
+   "full_name": "Siswa 13",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-14",
+   "full_name": "Siswa 14",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-15",
+   "full_name": "Siswa 15",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-16",
+   "full_name": "Siswa 16",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-17",
+   "full_name": "Siswa 17",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-18",
+   "full_name": "Siswa 18",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-19",
+   "full_name": "Siswa 19",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-20",
+   "full_name": "Siswa 20",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-21",
+   "full_name": "Siswa 21",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-22",
+   "full_name": "Siswa 22",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-23",
+   "full_name": "Siswa 23",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-24",
+   "full_name": "Siswa 24",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-25",
+   "full_name": "Siswa 25",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-26",
+   "full_name": "Siswa 26",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-27",
+   "full_name": "Siswa 27",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-28",
+   "full_name": "Siswa 28",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-29",
+   "full_name": "Siswa 29",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "SMP8-30",
+   "full_name": "Siswa 30",
+   "class_name": "VIII",
+   "role": "student"
+  },
+  {
+   "student_code": "GURU-01",
+   "full_name": "Guru Matematika",
+   "class_name": "VIII",
+   "role": "teacher"
+  }
+ ],
+ "questions": [
+  {
+   "id": "TZ-B01",
+   "category": "prasyarat",
+   "difficulty": 1,
+   "question_type": "multiple_choice",
+   "title": "Diameter ke Jari-jari",
+   "story_text": "Sebuah tutup kaleng susu berbentuk lingkaran dengan diameter 14 cm.",
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Berapa jari-jari tutup kaleng tersebut?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "7 cm",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "14 cm",
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "id": "c",
+       "text": "28 cm",
+       "error_type": "radius_doubled"
+      },
+      {
+       "id": "d",
+       "text": "3,5 cm",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Jari-jari adalah jarak dari titik pusat ke tepi lingkaran.",
+    "Diameter = 2 × jari-jari, jadi jari-jari = diameter ÷ 2.",
+    "Hitung 14 ÷ 2."
+   ],
+   "explanation": "d = 14 cm → r = d ÷ 2 = 14 ÷ 2 = 7 cm.",
+   "cylinder_type": null,
+   "highlights": [],
+   "max_score": 1
+  },
+  {
+   "id": "TZ-B02",
+   "category": "unsur",
+   "difficulty": 1,
+   "question_type": "true_false",
+   "title": "Titik Sudut Tabung",
+   "story_text": "Pernyataan: \"Tabung memiliki 2 titik sudut, yaitu di alas dan di tutup.\"",
+   "steps": [
+    {
+     "id": "tf",
+     "prompt": "Apakah pernyataan tersebut benar atau salah?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "benar",
+       "text": "Benar",
+       "error_type": "concept"
+      },
+      {
+       "id": "salah",
+       "text": "Salah",
+       "error_type": null
+      }
+     ],
+     "answer": "salah",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Titik sudut adalah titik pertemuan rusuk-rusuk yang lurus.",
+    "Rusuk tabung berbentuk lengkung (lingkaran), tidak ada rusuk lurus yang bertemu.",
+    "Tabung punya 3 sisi dan 2 rusuk lengkung. Bagaimana dengan titik sudutnya?"
+   ],
+   "explanation": "Salah. Tabung memiliki 3 sisi (alas, tutup, selimut), 2 rusuk lengkung, dan TIDAK memiliki titik sudut.",
+   "cylinder_type": null,
+   "highlights": [],
+   "max_score": 1
+  },
+  {
+   "id": "TZ-B03",
+   "category": "unsur",
+   "difficulty": 1,
+   "question_type": "identify_parts",
+   "title": "Bentuk Selimut Tabung",
+   "story_text": "Label kertas pada kaleng susu dilepas dengan hati-hati lalu dibentangkan di atas meja.",
+   "steps": [
+    {
+     "id": "shape",
+     "prompt": "Berbentuk apakah label (selimut tabung) setelah dibentangkan?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "Persegi panjang",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "Lingkaran",
+       "error_type": "concept"
+      },
+      {
+       "id": "c",
+       "text": "Segitiga",
+       "error_type": "concept"
+      },
+      {
+       "id": "d",
+       "text": "Trapesium",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "a",
+     "score": 1,
+     "visual": "label"
+    }
+   ],
+   "hints": [
+    "Bayangkan menggulung selembar kertas menjadi tabung.",
+    "Kertas yang digulung itu awalnya berbentuk apa?",
+    "Bentuknya punya 4 sudut siku-siku dan 2 pasang sisi sejajar."
+   ],
+   "explanation": "Selimut tabung yang dibentangkan berbentuk persegi panjang dengan panjang = keliling alas (2πr) dan lebar = tinggi tabung (t).",
+   "cylinder_type": null,
+   "highlights": [],
+   "max_score": 1
+  },
+  {
+   "id": "TZ-B04",
+   "category": "prasyarat",
+   "difficulty": 1,
+   "question_type": "numeric_steps",
+   "title": "Keliling Alas Tabung",
+   "story_text": "Sebuah tabung memiliki diameter alas 20 cm. Gunakan π = 3,14.",
+   "highlights": [
+    "diameter alas 20 cm",
+    "π = 3,14"
+   ],
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Diameter = 20 cm. Berapa jari-jarinya (r)?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 10.0,
+     "errors": [
+      {
+       "value": 20,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 40,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "k",
+     "prompt": "Berapa keliling alas tabung? (K = 2πr)",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 62.8,
+     "errors": [
+      {
+       "value": 62.857143,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 31.4,
+       "error_type": "forgot_two"
+      },
+      {
+       "value": 314.0,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 125.6,
+       "error_type": "diameter_as_radius"
+      }
+     ],
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Ubah dulu diameter menjadi jari-jari: r = d ÷ 2.",
+    "Rumus keliling lingkaran: K = 2 × π × r.",
+    "K = 2 × 3,14 × 10 = ..."
+   ],
+   "explanation": "r = 20 ÷ 2 = 10 cm.\nK = 2πr = 2 × 3,14 × 10 = 62,8 cm.",
+   "cylinder_type": null,
+   "max_score": 2
+  },
+  {
+   "id": "TZ-B05",
+   "category": "selimut",
+   "difficulty": 1,
+   "question_type": "numeric_steps",
+   "cylinder_type": "blanket",
+   "title": "Luas Selimut Dasar",
+   "story_text": "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Gunakan π = 22/7.",
+   "highlights": [
+    "jari-jari 7 cm",
+    "tinggi 10 cm",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "k",
+     "prompt": "Panjang selimut = keliling alas. Berapa keliling alasnya?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 44.0,
+     "errors": [
+      {
+       "value": 43.96,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 22.0,
+       "error_type": "forgot_two"
+      },
+      {
+       "value": 154.0,
+       "error_type": "area_vs_circumference"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "ls",
+     "prompt": "Berapa luas selimut tabung? (L = 2πrt)",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 440.0,
+     "errors": [
+      {
+       "value": 439.6,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 594.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 748.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 220.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Selimut yang dibentangkan berbentuk persegi panjang.",
+    "Panjangnya = keliling alas = 2πr, lebarnya = tinggi t.",
+    "Keliling = 2 × 22/7 × 7 = 44 cm. Luas = 44 × 10."
+   ],
+   "explanation": "Keliling alas = 2 × 22/7 × 7 = 44 cm.\nLuas selimut = keliling × tinggi = 44 × 10 = 440 cm².",
+   "max_score": 2
+  },
+  {
+   "id": "TZ-B06",
+   "category": "selimut",
+   "difficulty": 1,
+   "question_type": "true_false",
+   "title": "Ukuran Jaring-jaring",
+   "story_text": "Pernyataan: \"Panjang persegi panjang pada jaring-jaring tabung sama dengan keliling lingkaran alasnya.\"",
+   "steps": [
+    {
+     "id": "tf",
+     "prompt": "Apakah pernyataan tersebut benar atau salah?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "benar",
+       "text": "Benar",
+       "error_type": null
+      },
+      {
+       "id": "salah",
+       "text": "Salah",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "benar",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Ingat: selimut menempel mengelilingi tepi alas.",
+    "Sisi panjang selimut melingkari tepi lingkaran tepat satu putaran.",
+    "Satu putaran tepi lingkaran disebut ... lingkaran."
+   ],
+   "explanation": "Benar. Selimut tepat melingkari tepi alas satu putaran, sehingga panjangnya = keliling alas = 2πr.",
+   "cylinder_type": null,
+   "highlights": [],
+   "max_score": 1
+  },
+  {
+   "id": "TZ-B07",
+   "category": "prasyarat",
+   "difficulty": 1,
+   "question_type": "multiple_choice",
+   "title": "Memilih Nilai π",
+   "story_text": "Kamu akan menghitung luas lingkaran. Ada dua pilihan nilai π: 22/7 atau 3,14.",
+   "steps": [
+    {
+     "id": "pi",
+     "prompt": "Kapan paling efisien memakai π = 22/7?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "Saat jari-jari atau diameter kelipatan 7",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "Selalu, apa pun ukurannya",
+       "error_type": "wrong_pi"
+      },
+      {
+       "id": "c",
+       "text": "Saat jari-jari bilangan genap",
+       "error_type": "wrong_pi"
+      },
+      {
+       "id": "d",
+       "text": "Saat tinggi tabung kelipatan 7",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "22/7 punya penyebut 7.",
+    "Penyebut 7 akan habis jika dikalikan dengan bilangan kelipatan 7.",
+    "Contoh: 22/7 × 14 = 44 (bulat!). Bilangan apa yang dikalikan?"
+   ],
+   "explanation": "π = 22/7 efisien jika r atau d kelipatan 7 karena penyebut 7 bisa disederhanakan. Selain itu gunakan π = 3,14.",
+   "cylinder_type": null,
+   "highlights": [],
+   "max_score": 1
+  },
+  {
+   "id": "TZ-I01",
+   "category": "tertutup",
+   "difficulty": 2,
+   "question_type": "numeric_steps",
+   "cylinder_type": "closed",
+   "title": "Kaleng Biskuit Tertutup",
+   "story_text": "Sebuah kaleng biskuit tertutup berjari-jari 7 cm dan tinggi 12 cm. Gunakan π = 22/7.",
+   "highlights": [
+    "tertutup",
+    "jari-jari 7 cm",
+    "tinggi 12 cm",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "alas",
+     "prompt": "Luas satu lingkaran (alas)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 154.0,
+     "errors": [
+      {
+       "value": 153.86,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 44.0,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 22.0,
+       "error_type": "area_vs_circumference"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "dua",
+     "prompt": "Luas alas + tutup (2 lingkaran)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 308.0,
+     "errors": [
+      {
+       "value": 307.72,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 88.0,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 44.0,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 154.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "ls",
+     "prompt": "Luas selimut (2πrt)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 528.0,
+     "errors": [
+      {
+       "value": 527.52,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 682.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 836.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 264.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp",
+     "prompt": "Luas permukaan kaleng tertutup?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 836.0,
+     "errors": [
+      {
+       "value": 835.24,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 682.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 528.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "unit",
+     "prompt": "Cek satuan: luas permukaan dinyatakan dalam satuan apa?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "cm²",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "cm",
+       "error_type": "wrong_unit"
+      },
+      {
+       "id": "c",
+       "text": "cm³",
+       "error_type": "wrong_unit"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Kaleng tertutup → hitung alas, tutup, dan selimut.",
+    "Luas lingkaran = πr². Alas + tutup = 2πr². Selimut = 2πrt.",
+    "L = 2 × 154 + 528 = ..."
+   ],
+   "explanation": "Alas = 22/7 × 7 × 7 = 154 cm².\nAlas + tutup = 2 × 154 = 308 cm².\nSelimut = 2 × 22/7 × 7 × 12 = 528 cm².\nL = 308 + 528 = 836 cm²  (atau 2πr(r + t) = 44 × 19 = 836 cm²).",
+   "max_score": 5
+  },
+  {
+   "id": "TZ-I02",
+   "category": "tertutup",
+   "difficulty": 2,
+   "question_type": "numeric_steps",
+   "cylinder_type": "closed",
+   "title": "Drum Tertutup (π = 3,14)",
+   "story_text": "Sebuah drum tertutup memiliki diameter 60 cm dan tinggi 90 cm. Gunakan π = 3,14.",
+   "highlights": [
+    "tertutup",
+    "diameter 60 cm",
+    "tinggi 90 cm",
+    "π = 3,14"
+   ],
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Diameter = 60 cm. Berapa jari-jarinya (r)?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 30.0,
+     "errors": [
+      {
+       "value": 60,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 120,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp",
+     "prompt": "Luas permukaan drum tertutup? (L = 2πr(r + t))",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 22608.0,
+     "errors": [
+      {
+       "value": 22628.571429,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 56520.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 19782.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 16956.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "unit",
+     "prompt": "Cek satuan: luas permukaan dinyatakan dalam satuan apa?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "cm²",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "cm",
+       "error_type": "wrong_unit"
+      },
+      {
+       "id": "c",
+       "text": "cm³",
+       "error_type": "wrong_unit"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Yang diketahui diameter! Ubah dulu ke jari-jari.",
+    "r = 30 cm. Drum tertutup → L = 2πr(r + t).",
+    "L = 2 × 3,14 × 30 × (30 + 90) = ..."
+   ],
+   "explanation": "r = 60 ÷ 2 = 30 cm.\nL = 2πr(r + t) = 2 × 3,14 × 30 × 120 = 22.608 cm².",
+   "max_score": 3
+  },
+  {
+   "id": "TZ-I03",
+   "category": "tanpa_tutup",
+   "difficulty": 2,
+   "question_type": "numeric_steps",
+   "cylinder_type": "open",
+   "title": "Gelas Tanpa Tutup",
+   "story_text": "Sebuah gelas kaca tanpa tutup berjari-jari 3,5 cm dan tinggi 10 cm. Gunakan π = 22/7.",
+   "highlights": [
+    "tanpa tutup",
+    "jari-jari 3,5 cm",
+    "tinggi 10 cm",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "alas",
+     "prompt": "Luas alas gelas?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 38.5,
+     "errors": [
+      {
+       "value": 38.465,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 22.0,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 11.0,
+       "error_type": "area_vs_circumference"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "ls",
+     "prompt": "Luas selimut gelas?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 220.0,
+     "errors": [
+      {
+       "value": 219.8,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 258.5,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 297.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 110.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp",
+     "prompt": "Luas permukaan gelas (alas + selimut)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 258.5,
+     "errors": [
+      {
+       "value": 258.265,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 297.0,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 220.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "unit",
+     "prompt": "Cek satuan: luas permukaan dinyatakan dalam satuan apa?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "cm²",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "cm",
+       "error_type": "wrong_unit"
+      },
+      {
+       "id": "c",
+       "text": "cm³",
+       "error_type": "wrong_unit"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Gelas tidak punya tutup → hanya 1 lingkaran.",
+    "L = πr² + 2πrt.",
+    "Alas = 22/7 × 3,5 × 3,5 = 38,5. Selimut = 2 × 22/7 × 3,5 × 10 = 220."
+   ],
+   "explanation": "Alas = 22/7 × 3,5 × 3,5 = 38,5 cm².\nSelimut = 2 × 22/7 × 3,5 × 10 = 220 cm².\nL = 38,5 + 220 = 258,5 cm² (hanya 1 lingkaran karena tanpa tutup).",
+   "max_score": 4
+  },
+  {
+   "id": "TZ-I04",
+   "category": "tanpa_tutup",
+   "difficulty": 2,
+   "question_type": "numeric_steps",
+   "cylinder_type": "open",
+   "title": "Ember Tanpa Tutup",
+   "story_text": "Sebuah ember tanpa tutup berbentuk tabung dengan diameter 30 cm dan tinggi 25 cm. Gunakan π = 3,14.",
+   "highlights": [
+    "tanpa tutup",
+    "diameter 30 cm",
+    "tinggi 25 cm",
+    "π = 3,14"
+   ],
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Diameter = 30 cm. Berapa jari-jarinya (r)?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 15.0,
+     "errors": [
+      {
+       "value": 30,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 60,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "alas",
+     "prompt": "Luas alas ember?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 706.5,
+     "errors": [
+      {
+       "value": 707.142857,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 94.2,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 47.1,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 2826.0,
+       "error_type": "diameter_as_radius"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "ls",
+     "prompt": "Luas selimut ember?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 2355.0,
+     "errors": [
+      {
+       "value": 2357.142857,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 4710.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 3061.5,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 3768.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 1177.5,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp",
+     "prompt": "Luas permukaan ember?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 3061.5,
+     "errors": [
+      {
+       "value": 3064.285714,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 7536.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 3768.0,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 2355.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Diameter → jari-jari dulu. Ember → tanpa tutup.",
+    "L = πr² + 2πrt dengan r = 15.",
+    "Alas = 3,14 × 15 × 15 = 706,5. Selimut = 2 × 3,14 × 15 × 25 = 2.355."
+   ],
+   "explanation": "r = 15 cm.\nAlas = 3,14 × 225 = 706,5 cm².\nSelimut = 2 × 3,14 × 15 × 25 = 2.355 cm².\nL = 706,5 + 2.355 = 3.061,5 cm².",
+   "max_score": 4
+  },
+  {
+   "id": "TZ-I05",
+   "category": "tanpa_tutup",
+   "difficulty": 2,
+   "question_type": "identify_parts",
+   "cylinder_type": "blanket",
+   "title": "Pipa Paralon",
+   "story_text": "Sebuah pipa paralon terbuka di kedua ujungnya akan dicat bagian luarnya.",
+   "highlights": [
+    "terbuka di kedua ujungnya",
+    "bagian luarnya"
+   ],
+   "steps": [
+    {
+     "id": "parts",
+     "prompt": "Bagian permukaan mana yang dihitung luasnya?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "2 Lingkaran + 1 Selimut",
+       "error_type": "included_bases"
+      },
+      {
+       "id": "b",
+       "text": "1 Lingkaran + 1 Selimut",
+       "error_type": "included_bases"
+      },
+      {
+       "id": "c",
+       "text": "Selimut saja",
+       "error_type": null
+      },
+      {
+       "id": "d",
+       "text": "2 Lingkaran saja",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "c",
+     "score": 1,
+     "visual": "paralon"
+    }
+   ],
+   "hints": [
+    "Pipa paralon berlubang di kedua ujung.",
+    "Apakah ada lingkaran alas atau tutup yang dicat?",
+    "Hanya bagian yang melingkar di luar."
+   ],
+   "explanation": "Pipa terbuka di kedua ujung tidak punya alas dan tutup, jadi yang dihitung hanya selimut: L = 2πrt.",
+   "max_score": 1
+  },
+  {
+   "id": "TZ-I06",
+   "category": "tanpa_tutup",
+   "difficulty": 2,
+   "question_type": "identify_parts",
+   "cylinder_type": "open",
+   "title": "Tong Sampah Terbuka",
+   "story_text": "Sebuah tong sampah tanpa tutup akan dicat bagian luarnya, termasuk alasnya.",
+   "highlights": [
+    "tanpa tutup",
+    "termasuk alasnya"
+   ],
+   "steps": [
+    {
+     "id": "parts",
+     "prompt": "Kombinasi bagian yang dihitung?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "2 Lingkaran + 1 Selimut",
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "id": "b",
+       "text": "1 Lingkaran + 1 Selimut",
+       "error_type": null
+      },
+      {
+       "id": "c",
+       "text": "Selimut saja",
+       "error_type": "blanket_only"
+      },
+      {
+       "id": "d",
+       "text": "2 Lingkaran saja",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "b",
+     "score": 1,
+     "visual": "tong"
+    }
+   ],
+   "hints": [
+    "Tong ini tidak punya tutup.",
+    "Alas tetap ada dan ikut dicat.",
+    "Jadi: 1 lingkaran (alas) + selimut."
+   ],
+   "explanation": "Tanpa tutup → 1 lingkaran (alas) + selimut: L = πr² + 2πrt.",
+   "max_score": 1
+  },
+  {
+   "id": "TZ-I07",
+   "category": "tanpa_tutup",
+   "difficulty": 2,
+   "question_type": "multiple_choice",
+   "cylinder_type": "open",
+   "title": "Rumus Tabung Tanpa Tutup",
+   "story_text": "Perhatikan rumus-rumus berikut.",
+   "steps": [
+    {
+     "id": "f",
+     "prompt": "Rumus luas permukaan tabung TANPA TUTUP adalah ...",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "πr² + 2πrt",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "2πr(r + t)",
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "id": "c",
+       "text": "2πrt",
+       "error_type": "blanket_only"
+      },
+      {
+       "id": "d",
+       "text": "πr²t",
+       "error_type": "volume_confusion"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Hitung ada berapa lingkaran pada tabung tanpa tutup.",
+    "Hanya 1 lingkaran (alas) → πr². Selimut → 2πrt.",
+    "Jumlahkan keduanya."
+   ],
+   "explanation": "Tanpa tutup: 1 lingkaran + selimut = πr² + 2πrt. Rumus 2πr(r + t) untuk tabung tertutup, 2πrt hanya selimut, πr²t adalah volume.",
+   "highlights": [],
+   "max_score": 1
+  },
+  {
+   "id": "TZ-I08",
+   "category": "selimut",
+   "difficulty": 2,
+   "question_type": "numeric_steps",
+   "cylinder_type": "blanket",
+   "title": "Label Kaleng Susu",
+   "story_text": "Label kertas menutupi seluruh sisi lengkung kaleng susu berdiameter 7 cm dan tinggi 11 cm. Gunakan π = 22/7.",
+   "highlights": [
+    "sisi lengkung",
+    "diameter 7 cm",
+    "tinggi 11 cm",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Diameter = 7 cm. Berapa jari-jarinya (r)?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 3.5,
+     "errors": [
+      {
+       "value": 7,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 14,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "ls",
+     "prompt": "Berapa luas label kertas?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 242.0,
+     "errors": [
+      {
+       "value": 241.78,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 484.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 280.5,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 319.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 121.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Label hanya menutupi selimut.",
+    "r = 7 ÷ 2 = 3,5 cm. L = 2πrt.",
+    "L = 2 × 22/7 × 3,5 × 11 = 22 × 11."
+   ],
+   "explanation": "r = 3,5 cm. Luas label = 2πrt = 2 × 22/7 × 3,5 × 11 = 242 cm².",
+   "max_score": 2
+  },
+  {
+   "id": "TZ-E01",
+   "category": "literasi_latihan",
+   "difficulty": 3,
+   "question_type": "story",
+   "cylinder_type": "closed",
+   "title": "Mengecat Drum Minyak",
+   "story_text": "Pak Darto memiliki sebuah drum minyak tertutup dengan diameter 56 cm dan tinggi 100 cm. Ia ingin mengecat seluruh permukaan luar drum tersebut. Tentukan luas yang dicat dalam cm² lalu ubah ke m². Gunakan π = 22/7.",
+   "highlights": [
+    "tertutup",
+    "diameter 56 cm",
+    "tinggi 100 cm",
+    "seluruh permukaan luar",
+    "m²",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Diameter = 56 cm. Berapa jari-jarinya (r)?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 28.0,
+     "errors": [
+      {
+       "value": 56,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 112,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "f",
+     "prompt": "Rumus yang tepat untuk masalah ini?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "2πr(r + t)",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "πr² + 2πrt",
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "id": "c",
+       "text": "2πrt",
+       "error_type": "blanket_only"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    },
+    {
+     "id": "lp",
+     "prompt": "Luas permukaan drum (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 22528.0,
+     "errors": [
+      {
+       "value": 22507.52,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 54912.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 20064.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 17600.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "m2",
+     "prompt": "Ubah ke m² (1 m² = 10.000 cm²)",
+     "kind": "number",
+     "unit": "m²",
+     "answer": 2.2528,
+     "errors": [
+      {
+       "value": 225.28,
+       "error_type": "unit_conversion"
+      },
+      {
+       "value": 22.528,
+       "error_type": "unit_conversion"
+      }
+     ],
+     "score": 1,
+     "tolerance": 0.001
+    }
+   ],
+   "hints": [
+    "Sorot: tertutup, diameter (bukan jari-jari!), dan satuan yang diminta.",
+    "r = 28 cm. L = 2πr(r + t) = 2 × 22/7 × 28 × 128.",
+    "L = 22.528 cm². Bagi 10.000 untuk mengubah ke m²."
+   ],
+   "explanation": "r = 28 cm.\nL = 2πr(r + t) = 2 × 22/7 × 28 × (28 + 100) = 176 × 128 = 22.528 cm².\n22.528 ÷ 10.000 = 2,2528 m².",
+   "max_score": 4
+  },
+  {
+   "id": "TZ-E02",
+   "category": "literasi_latihan",
+   "difficulty": 3,
+   "question_type": "story",
+   "cylinder_type": "open",
+   "title": "Stiker Gelas Souvenir",
+   "story_text": "Sebuah toko souvenir menempel stiker pada seluruh bagian luar 12 gelas tanpa tutup (alas dan sisi lengkung). Setiap gelas berjari-jari 4 cm dan tinggi 10 cm. Gunakan π = 3,14.",
+   "highlights": [
+    "12 gelas",
+    "tanpa tutup",
+    "alas dan sisi lengkung",
+    "jari-jari 4 cm",
+    "tinggi 10 cm",
+    "π = 3,14"
+   ],
+   "steps": [
+    {
+     "id": "satu",
+     "prompt": "Luas stiker untuk 1 gelas?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 301.44,
+     "errors": [
+      {
+       "value": 301.714286,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 351.68,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 251.2,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "total",
+     "prompt": "Luas stiker untuk 12 gelas?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 3617.28,
+     "errors": [
+      {
+       "value": 3620.571429,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 4220.16,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 3014.4,
+       "error_type": "blanket_only"
+      },
+      {
+       "value": 301.44,
+       "error_type": "missing_quantity"
+      }
+     ],
+     "score": 1
+    }
+   ],
+   "hints": [
+    "Satu gelas tanpa tutup → πr² + 2πrt.",
+    "1 gelas = 3,14 × 16 + 2 × 3,14 × 4 × 10 = 50,24 + 251,2.",
+    "Kalikan hasil 1 gelas dengan 12."
+   ],
+   "explanation": "1 gelas = 50,24 + 251,2 = 301,44 cm².\n12 gelas = 12 × 301,44 = 3.617,28 cm².",
+   "max_score": 2
+  },
+  {
+   "id": "TZ-E03",
+   "category": "literasi_latihan",
+   "difficulty": 3,
+   "question_type": "story",
+   "cylinder_type": "blanket",
+   "title": "Mengecat Pipa Paralon",
+   "story_text": "Lima pipa paralon terbuka di kedua ujung akan dicat bagian luarnya. Setiap pipa berdiameter 10 cm dan panjang 2 m. Gunakan π = 3,14 dan nyatakan jawaban akhir dalam m².",
+   "highlights": [
+    "Lima pipa",
+    "terbuka di kedua ujung",
+    "diameter 10 cm",
+    "panjang 2 m",
+    "m²",
+    "π = 3,14"
+   ],
+   "steps": [
+    {
+     "id": "r",
+     "prompt": "Diameter = 10 cm. Berapa jari-jarinya (r)?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 5.0,
+     "errors": [
+      {
+       "value": 10,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 20,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "t",
+     "prompt": "Tinggi (panjang) pipa dalam cm?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 200,
+     "errors": [
+      {
+       "value": 2,
+       "error_type": "unit_conversion"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "satu",
+     "prompt": "Luas selimut 1 pipa (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 6280.0,
+     "errors": [
+      {
+       "value": 6285.714286,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 12560.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 6358.5,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 6437.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 3140.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "m2",
+     "prompt": "Luas total 5 pipa dalam m²?",
+     "kind": "number",
+     "unit": "m²",
+     "answer": 3.14,
+     "errors": [
+      {
+       "value": 31400,
+       "error_type": "unit_conversion"
+      },
+      {
+       "value": 0.628,
+       "error_type": "missing_quantity"
+      },
+      {
+       "value": 314,
+       "error_type": "unit_conversion"
+      }
+     ],
+     "score": 1,
+     "tolerance": 0.005
+    }
+   ],
+   "hints": [
+    "Samakan satuan dulu: 2 m = 200 cm. Pipa terbuka → selimut saja.",
+    "1 pipa = 2 × 3,14 × 5 × 200 = 6.280 cm².",
+    "5 pipa = 31.400 cm². Bagi 10.000 untuk ke m²."
+   ],
+   "explanation": "r = 5 cm, t = 200 cm.\n1 pipa = 2πrt = 6.280 cm².\n5 pipa = 31.400 cm² = 3,14 m².",
+   "max_score": 4
+  },
+  {
+   "id": "TZ-E04",
+   "category": "literasi_latihan",
+   "difficulty": 3,
+   "question_type": "story",
+   "cylinder_type": "closed",
+   "title": "Karton untuk Tempat Pensil",
+   "story_text": "Kelas VIII membuat 4 tempat pensil tertutup berbentuk tabung dari karton. Setiap tabung berjari-jari 7 cm dan tinggi 8 cm. Satu lembar karton luasnya 1.000 cm². Berapa lembar karton yang harus dibeli? (Abaikan sisa potongan.) Gunakan π = 22/7.",
+   "highlights": [
+    "4 tempat pensil",
+    "tertutup",
+    "jari-jari 7 cm",
+    "tinggi 8 cm",
+    "1.000 cm²",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "satu",
+     "prompt": "Luas permukaan 1 tabung?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 660.0,
+     "errors": [
+      {
+       "value": 659.4,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 506.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 352.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "total",
+     "prompt": "Luas karton untuk 4 tabung?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 2640.0,
+     "errors": [
+      {
+       "value": 2637.6,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 2024.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 1408.0,
+       "error_type": "blanket_only"
+      },
+      {
+       "value": 660.0,
+       "error_type": "missing_quantity"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lembar",
+     "prompt": "Berapa lembar karton yang harus dibeli?",
+     "kind": "number",
+     "unit": "lembar",
+     "answer": 3,
+     "errors": [
+      {
+       "value": 2,
+       "error_type": "rounding_down"
+      },
+      {
+       "value": 2.64,
+       "error_type": "rounding_not_applied"
+      }
+     ],
+     "score": 1,
+     "tolerance": 0.01
+    }
+   ],
+   "hints": [
+    "Hitung luas 1 tabung tertutup: 2πr(r + t).",
+    "1 tabung = 660 cm², 4 tabung = 2.640 cm². 2.640 ÷ 1.000 = 2,64.",
+    "Bisakah membeli 2,64 lembar? Jika beli 2 lembar, apakah cukup?"
+   ],
+   "explanation": "1 tabung = 2 × 22/7 × 7 × 15 = 660 cm².\n4 tabung = 2.640 cm².\n2.640 ÷ 1.000 = 2,64 → harus dibulatkan KE ATAS menjadi 3 lembar, karena 2 lembar (2.000 cm²) tidak cukup.",
+   "max_score": 3
+  }
+ ],
+ "literacy": [
+  {
+   "id": "LIT-1",
+   "indicator": "reasoning",
+   "title": "Desain Kaleng Paling Hemat Bahan",
+   "story_text": "Sebuah pabrik minuman sedang memilih desain kaleng tertutup. Desain A memiliki jari-jari 7 cm dan tinggi 10 cm. Desain B memiliki diameter 7 cm dan tinggi 40 cm. Kedua desain dapat menampung volume minuman yang sama, yaitu 1.540 cm³. Pabrik ingin memakai pelat kaleng sesedikit mungkin. Gunakan π = 22/7.",
+   "highlights": [
+    "kaleng tertutup",
+    "jari-jari 7 cm",
+    "tinggi 10 cm",
+    "diameter 7 cm",
+    "tinggi 40 cm",
+    "pelat kaleng sesedikit mungkin",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "r_b",
+     "prompt": "Tahap 1 — Berapa jari-jari kaleng desain B?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 3.5,
+     "errors": [
+      {
+       "value": 7,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 14,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp_a",
+     "prompt": "Tahap 2 — Berapa luas permukaan kaleng desain A?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 748.0,
+     "errors": [
+      {
+       "value": 747.32,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 594.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 440.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp_b",
+     "prompt": "Tahap 3 — Berapa luas permukaan kaleng desain B?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 957.0,
+     "errors": [
+      {
+       "value": 956.13,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 2068.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 918.5,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 880.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "pilih",
+     "prompt": "Tahap 4 — Desain mana yang paling hemat bahan?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "Desain A",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "Desain B",
+       "error_type": "concept"
+      },
+      {
+       "id": "c",
+       "text": "Sama saja karena volumenya sama",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    },
+    {
+     "id": "alasan",
+     "prompt": "Tahap 5 — Jelaskan alasan matematis pilihanmu.",
+     "kind": "text",
+     "keywords": [
+      {
+       "any": [
+        "lebih kecil",
+        "lebih sedikit",
+        "lebih hemat",
+        "lebih rendah",
+        "paling kecil",
+        "paling sedikit",
+        "kecil",
+        "sedikit",
+        "hemat"
+       ],
+       "points": 1
+      },
+      {
+       "any": [
+        "748",
+        "957",
+        "209",
+        "selisih"
+       ],
+       "points": 1
+      }
+     ],
+     "model_answer": "Desain A lebih hemat karena luas permukaannya 748 cm², lebih kecil dari desain B (957 cm²). Selisihnya 209 cm², padahal volumenya sama.",
+     "score": 2
+    }
+   ],
+   "explanation": "r_B = 7 ÷ 2 = 3,5 cm.\nL_A = 2πr(r + t) = 2 × 22/7 × 7 × (7 + 10) = 44 × 17 = 748 cm².\nL_B = 2 × 22/7 × 3,5 × (3,5 + 40) = 22 × 43,5 = 957 cm².\nVolume sama, tetapi luas permukaan A lebih kecil (selisih 209 cm²), jadi desain A lebih hemat bahan.",
+   "max_score": 6
+  },
+  {
+   "id": "LIT-2",
+   "indicator": "formulating",
+   "title": "Cat untuk Tong Sampah Sekolah",
+   "story_text": "OSIS akan mengecat bagian luar 5 tong sampah tanpa tutup (alas dan sisi lengkung). Setiap tong berdiameter 56 cm dan tinggi 80 cm. Satu kaleng cat cukup untuk mengecat 2 m². OSIS sudah memiliki 4 kaleng cat. Apakah cat tersebut cukup? Gunakan π = 22/7.",
+   "highlights": [
+    "5 tong sampah",
+    "tanpa tutup",
+    "diameter 56 cm",
+    "tinggi 80 cm",
+    "2 m²",
+    "4 kaleng cat",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "model",
+     "prompt": "Tahap 1 — Model matematika luas yang dicat untuk satu tong adalah ...",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "πr² + 2πrt",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "2πr(r + t)",
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "id": "c",
+       "text": "2πrt",
+       "error_type": "blanket_only"
+      },
+      {
+       "id": "d",
+       "text": "πr²t",
+       "error_type": "volume_confusion"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    },
+    {
+     "id": "r",
+     "prompt": "Tahap 2 — Berapa jari-jari tong?",
+     "kind": "number",
+     "unit": "cm",
+     "answer": 28.0,
+     "errors": [
+      {
+       "value": 56,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 112,
+       "error_type": "radius_doubled"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp_satu",
+     "prompt": "Tahap 3 — Luas yang dicat untuk 1 tong (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 16544.0,
+     "errors": [
+      {
+       "value": 16528.96,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 38016.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 19008.0,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 14080.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp_total",
+     "prompt": "Tahap 4 — Luas yang dicat untuk 5 tong (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 82720.0,
+     "errors": [
+      {
+       "value": 82644.8,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 190080.0,
+       "error_type": "diameter_as_radius"
+      },
+      {
+       "value": 95040.0,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 70400.0,
+       "error_type": "blanket_only"
+      },
+      {
+       "value": 16544.0,
+       "error_type": "missing_quantity"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp_m2",
+     "prompt": "Tahap 5 — Ubah luas total ke m².",
+     "kind": "number",
+     "unit": "m²",
+     "answer": 8.272,
+     "errors": [
+      {
+       "value": 827.2,
+       "error_type": "unit_conversion"
+      },
+      {
+       "value": 82.72,
+       "error_type": "unit_conversion"
+      },
+      {
+       "value": 1.6544,
+       "error_type": "missing_quantity"
+      }
+     ],
+     "score": 1,
+     "tolerance": 0.005
+    },
+    {
+     "id": "cukup",
+     "prompt": "Tahap 6 — Kesimpulan: apakah 4 kaleng cat cukup?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "Tidak cukup; 4 kaleng hanya untuk 8 m², perlu 5 kaleng",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "Cukup; 8,272 dibulatkan menjadi 8 m²",
+       "error_type": "rounding_down"
+      },
+      {
+       "id": "c",
+       "text": "Cukup dan masih bersisa",
+       "error_type": "concept"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    }
+   ],
+   "explanation": "Tong tanpa tutup → L = πr² + 2πrt, r = 56 ÷ 2 = 28 cm.\n1 tong = 22/7 × 28 × 28 + 2 × 22/7 × 28 × 80 = 2.464 + 14.080 = 16.544 cm².\n5 tong = 82.720 cm² = 8,272 m².\n4 kaleng hanya untuk 4 × 2 = 8 m² < 8,272 m² → TIDAK cukup; perlu 5 kaleng.",
+   "max_score": 6
+  },
+  {
+   "id": "LIT-3",
+   "indicator": "employing",
+   "title": "Kertas Kado Celengan",
+   "story_text": "Rani membuat 3 celengan berbentuk tabung dengan jari-jari 7 cm dan tinggi 15 cm. Bagian tutup dan selimut setiap celengan akan dilapisi kertas kado, sedangkan alasnya tidak. Biaya kertas kado Rp20 per cm². Berapa total biaya yang dibutuhkan Rani? Gunakan π = 22/7.",
+   "highlights": [
+    "3 celengan",
+    "jari-jari 7 cm",
+    "tinggi 15 cm",
+    "tutup dan selimut",
+    "alasnya tidak",
+    "Rp20 per cm²",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "tutup",
+     "prompt": "Tahap 1 — Luas tutup 1 celengan (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 154,
+     "errors": [
+      {
+       "value": 308,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 44,
+       "error_type": "area_vs_circumference"
+      },
+      {
+       "value": 153.86,
+       "error_type": "wrong_pi"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "selimut",
+     "prompt": "Tahap 2 — Luas selimut 1 celengan (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 660.0,
+     "errors": [
+      {
+       "value": 659.4,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 814.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 968.0,
+       "error_type": "included_bases"
+      },
+      {
+       "value": 330.0,
+       "error_type": "forgot_two"
+      }
+     ],
+     "score": 2
+    },
+    {
+     "id": "total",
+     "prompt": "Tahap 3 — Luas yang dilapisi untuk 1 celengan (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 814.0,
+     "errors": [
+      {
+       "value": 813.26,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 968.0,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 660.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "biaya",
+     "prompt": "Tahap 4 — Total biaya untuk 3 celengan (Rp)?",
+     "kind": "number",
+     "unit": "Rp",
+     "answer": 48840,
+     "errors": [
+      {
+       "value": 16280,
+       "error_type": "missing_quantity"
+      },
+      {
+       "value": 58080,
+       "error_type": "closed_instead_of_open"
+      },
+      {
+       "value": 39600,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 2,
+     "tolerance": 1
+    }
+   ],
+   "explanation": "Tutup = 22/7 × 7 × 7 = 154 cm².\nSelimut = 2 × 22/7 × 7 × 15 = 660 cm².\n1 celengan = 154 + 660 = 814 cm² (alas tidak dihitung).\n3 celengan = 2.442 cm² × Rp20 = Rp48.840.",
+   "max_score": 6
+  },
+  {
+   "id": "LIT-4",
+   "indicator": "evaluating",
+   "title": "Klaim Lembaran Seng",
+   "story_text": "Pak Bima, seorang pengrajin, akan membuat 6 tabung air tertutup dari seng. Setiap tabung berjari-jari 14 cm dan tinggi 50 cm. Satu lembar seng berukuran 100 cm × 50 cm. Setelah menghitung, Pak Bima mendapat hasil 6,76 lembar lalu berkata: \"Cukup beli 6 lembar saja, karena 6,76 dibulatkan menjadi 6.\" (Abaikan sisa potongan seng.) Gunakan π = 22/7.",
+   "highlights": [
+    "6 tabung air tertutup",
+    "jari-jari 14 cm",
+    "tinggi 50 cm",
+    "100 cm × 50 cm",
+    "Cukup beli 6 lembar saja",
+    "π = 22/7"
+   ],
+   "steps": [
+    {
+     "id": "lp_satu",
+     "prompt": "Tahap 1 — Luas permukaan 1 tabung (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 5632.0,
+     "errors": [
+      {
+       "value": 5626.88,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 5016.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 4400.0,
+       "error_type": "blanket_only"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lp_total",
+     "prompt": "Tahap 2 — Luas seng untuk 6 tabung (cm²)?",
+     "kind": "number",
+     "unit": "cm²",
+     "answer": 33792.0,
+     "errors": [
+      {
+       "value": 33761.28,
+       "error_type": "wrong_pi"
+      },
+      {
+       "value": 30096.0,
+       "error_type": "open_instead_of_closed"
+      },
+      {
+       "value": 26400.0,
+       "error_type": "blanket_only"
+      },
+      {
+       "value": 5632.0,
+       "error_type": "missing_quantity"
+      }
+     ],
+     "score": 1
+    },
+    {
+     "id": "lembar",
+     "prompt": "Tahap 3 — Banyak lembar seng hasil pembagian (boleh desimal)?",
+     "kind": "number",
+     "unit": "lembar",
+     "answer": 6.7584,
+     "errors": [
+      {
+       "value": 3.3792,
+       "error_type": "unit_conversion"
+      }
+     ],
+     "score": 1,
+     "tolerance": 0.01
+    },
+    {
+     "id": "klaim",
+     "prompt": "Tahap 4 — Apakah klaim Pak Bima benar?",
+     "kind": "choice",
+     "options": [
+      {
+       "id": "a",
+       "text": "Tidak benar",
+       "error_type": null
+      },
+      {
+       "id": "b",
+       "text": "Benar",
+       "error_type": "rounding_down"
+      }
+     ],
+     "answer": "a",
+     "score": 1
+    },
+    {
+     "id": "beli",
+     "prompt": "Tahap 5 — Berapa lembar seng yang sebenarnya harus dibeli?",
+     "kind": "number",
+     "unit": "lembar",
+     "answer": 7,
+     "errors": [
+      {
+       "value": 6,
+       "error_type": "rounding_down"
+      },
+      {
+       "value": 6.76,
+       "error_type": "rounding_not_applied"
+      }
+     ],
+     "score": 1,
+     "tolerance": 0.01
+    },
+    {
+     "id": "alasan",
+     "prompt": "Tahap 6 — Berikan alasan kontekstual untuk jawabanmu.",
+     "kind": "text",
+     "keywords": [
+      {
+       "any": [
+        "kurang",
+        "tidak cukup",
+        "tidak akan cukup",
+        "kekurangan",
+        "ke atas",
+        "keatas",
+        "30.000",
+        "30000",
+        "33.792",
+        "33792",
+        "tidak bisa",
+        "belum cukup"
+       ],
+       "points": 1
+      }
+     ],
+     "model_answer": "Jika hanya membeli 6 lembar (30.000 cm²), seng tidak cukup untuk 33.792 cm². Kebutuhan barang harus dibulatkan ke atas, jadi beli 7 lembar.",
+     "score": 1
+    }
+   ],
+   "explanation": "1 tabung = 2πr(r + t) = 2 × 22/7 × 14 × 64 = 5.632 cm².\n6 tabung = 33.792 cm². 1 lembar seng = 100 × 50 = 5.000 cm².\n33.792 ÷ 5.000 = 6,7584 lembar.\nKlaim salah: 6 lembar = 30.000 cm² < 33.792 cm² sehingga kurang. Barang yang dibeli harus dibulatkan ke atas → 7 lembar.",
+   "max_score": 6
+  }
+ ],
+ "indicators": {
+  "reasoning": "Mathematical Reasoning",
+  "formulating": "Formulating Situations Mathematically",
+  "employing": "Employing Mathematical Concepts, Facts, and Procedures",
+  "evaluating": "Interpreting, Applying, and Evaluating Mathematical Outcomes"
+ },
+ "error_feedback": {
+  "diameter_as_radius": "Sepertinya kamu memakai diameter sebagai jari-jari. Ingat: r = d ÷ 2.",
+  "radius_doubled": "Jari-jari justru setengah dari diameter, bukan dua kalinya. r = d ÷ 2.",
+  "closed_instead_of_open": "Hati-hati! Benda ini tanpa tutup, jadi hanya ada 1 lingkaran (alas). Rumusnya πr² + 2πrt.",
+  "open_instead_of_closed": "Benda ini tertutup, jadi ada 2 lingkaran (alas + tutup). Jangan lupa tutupnya!",
+  "blanket_only": "Kamu baru menghitung selimutnya saja. Cek lagi: ada lingkaran alas/tutup yang perlu dihitung?",
+  "included_bases": "Bagian ini hanya selimut (sisi lengkung). Lingkaran alas/tutup tidak ikut dihitung.",
+  "wrong_pi": "Nilai π yang dipakai berbeda dengan yang diminta soal. Baca lagi: π = 22/7 atau 3,14?",
+  "forgot_two": "Ada angka 2 yang terlewat. Keliling = 2πr, selimut = 2πrt, alas + tutup = 2πr².",
+  "area_vs_circumference": "Luas lingkaran = πr² (r dikuadratkan), sedangkan keliling = 2πr. Jangan tertukar.",
+  "unit_conversion": "Cek konversi satuan. 1 m = 100 cm, sedangkan 1 m² = 10.000 cm².",
+  "missing_quantity": "Jumlah bendanya lebih dari satu! Kalikan hasil satu benda dengan banyaknya benda.",
+  "rounding_down": "Untuk kebutuhan barang, hasil harus dibulatkan KE ATAS agar bahannya cukup.",
+  "rounding_not_applied": "Barang tidak bisa dibeli pecahan. Bulatkan hasilnya ke atas.",
+  "wrong_unit": "Luas selalu bersatuan persegi, misalnya cm² atau m².",
+  "volume_confusion": "πr²t adalah rumus volume (isi), bukan luas permukaan.",
+  "concept": "Konsepnya belum tepat. Coba buka petunjuk untuk mengingat kembali.",
+  "calculation": "Rumusnya mungkin sudah benar, tapi hitungannya belum tepat. Cek lagi langkah perkaliannya.",
+  "invalid_input": "Jawaban belum diisi atau bukan angka yang valid.",
+  "empty": "Bagian ini belum dijawab.",
+  "partial_reason": "Alasanmu sudah ada, tapi lengkapi dengan perbandingan angka hasil perhitungan."
+ },
+ "rules": {
+  "level_thresholds": [
+   0,
+   100,
+   250,
+   450,
+   700,
+   1000,
+   1400
+  ],
+  "level_titles": [
+   "Penjelajah Pemula",
+   "Pengamat Lingkaran",
+   "Perakit Jaring",
+   "Arsitek Rumus",
+   "Penjaga Benteng",
+   "Pendaki Literasi",
+   "Master Tabung"
+  ],
+  "xp_lesson": 50,
+  "xp_lab_unfold": 20,
+  "xp_game_first": 15,
+  "xp_game_mastery": 25,
+  "game_mastery_score": 70,
+  "training_mission_target": 5,
+  "hint_free_target": 5
+ }
+}

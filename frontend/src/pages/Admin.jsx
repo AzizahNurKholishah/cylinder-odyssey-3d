@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Plus, Users } from 'lucide-react'
 import { Button, Card, ErrorBox, Feedback, PageHeader, Spinner } from '../components/ui/index.jsx'
-import { API } from '../lib/api.js'
+import { API, IS_STANDALONE } from '../lib/api.js'
 import { useApi } from '../lib/useApi.js'
 
 export default function Admin() {
@@ -34,6 +34,9 @@ export default function Admin() {
   return (
     <div className="space-y-5">
       <PageHeader icon={Users} eyebrow="Panel Guru" title="Pengelolaan Data Siswa" subtitle="Tambah kode siswa dan pantau progres belajar serta skor literasi." />
+      {IS_STANDALONE && (
+        <Feedback ok>Mode tanpa server: data progres tersimpan di masing-masing perangkat. Daftar di bawah hanya menampilkan progres siswa yang belajar di perangkat ini, dan kode baru hanya berlaku di perangkat ini.</Feedback>
+      )}
       <Card>
         <h2 className="mb-3 font-extrabold text-navy">Tambah Kode Siswa</h2>
         <form onSubmit={submit} className="grid gap-3 sm:grid-cols-4" noValidate>

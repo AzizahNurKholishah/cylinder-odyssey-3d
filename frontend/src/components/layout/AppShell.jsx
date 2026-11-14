@@ -1,4 +1,4 @@
-import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Link, NavLink, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Dumbbell, FlaskConical, Gamepad2, House, LogOut, Map, Trophy, User, Users } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { Logo } from '../Brand.jsx'
@@ -22,7 +22,10 @@ export function ProtectedRoute({ teacher = false }) {
 }
 
 export default function AppShell() {
-  const { user, logout } = useAuth()
+  const { user, logout: clearSession } = useAuth()
+  const navigate = useNavigate()
+  // Keluar → halaman login tanpa "halaman terakhir", agar pengguna berikutnya tidak diarahkan ke halaman milik orang lain
+  const logout = () => { clearSession(); navigate('/login', { replace: true }) }
   const isTeacher = user?.role === 'teacher'
   return (
     <div className="min-h-dvh pb-20 lg:pb-0">
