@@ -5,6 +5,8 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
+  // true setelah pengguna menekan Keluar → jangan ingat 'halaman terakhir' untuk pengguna berikutnya
+  const [loggedOut, setLoggedOut] = useState(false)
   const [loading, setLoading] = useState(() => Boolean(tokenStore.get()))
 
   useEffect(() => {
@@ -24,6 +26,7 @@ export function AuthProvider({ children }) {
   const login = useCallback(async (code, accessKey) => {
     const d = await API.login(code, accessKey || undefined)
     tokenStore.set(d.token)
+    setLoggedOut(false)
     setUser(d.profile)
     return d.profile
   }, [])
@@ -31,16 +34,18 @@ export function AuthProvider({ children }) {
   const loginStudent = useCallback(async (name) => {
     const d = await API.loginStudent(name)
     tokenStore.set(d.token)
+    setLoggedOut(false)
     setUser(d.profile)
     return d
   }, [])
 
   const logout = useCallback(() => {
     tokenStore.clear()
+    setLoggedOut(true)
     setUser(null)
   }, [])
 
-  const value = useMemo(() => ({ user, loading, login, loginStudent, logout }), [user, loading, login, loginStudent, logout])
+  const value = useMemo(() => ({ user, loading, loggedOut, login, loginStudent, logout }), [user, loading, loggedOut, login, loginStudent, logout])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 

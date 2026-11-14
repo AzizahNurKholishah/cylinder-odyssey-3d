@@ -13,10 +13,11 @@ const NAV = [
 ]
 
 export function ProtectedRoute({ teacher = false }) {
-  const { user, loading } = useAuth()
+  const { user, loading, loggedOut } = useAuth()
   const location = useLocation()
   if (loading) return <Spinner label="Memeriksa sesi..." />
-  if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
+  // simpan halaman tujuan hanya untuk tautan langsung/sesi berakhir, bukan setelah Keluar
+  if (!user) return <Navigate to="/login" replace state={loggedOut ? undefined : { from: location.pathname }} />
   if (teacher && user.role !== 'teacher') return <Navigate to="/dashboard" replace />
   return <Outlet />
 }
