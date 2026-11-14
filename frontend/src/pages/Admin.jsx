@@ -33,10 +33,11 @@ export default function Admin() {
 
   return (
     <div className="space-y-5">
-      <PageHeader icon={Users} eyebrow="Panel Guru" title="Pengelolaan Data Siswa" subtitle="Tambah kode siswa dan pantau progres belajar serta skor literasi." />
+      <PageHeader icon={Users} eyebrow="Panel Guru" title="Pengelolaan Data Siswa" subtitle={IS_STANDALONE ? 'Pantau progres belajar dan skor literasi siswa yang belajar di perangkat ini.' : 'Tambah kode siswa dan pantau progres belajar serta skor literasi.'} />
       {IS_STANDALONE && (
-        <Feedback ok>Mode tanpa server: data progres tersimpan di masing-masing perangkat. Daftar di bawah hanya menampilkan progres siswa yang belajar di perangkat ini, dan kode baru hanya berlaku di perangkat ini.</Feedback>
+        <Feedback ok>Mode tanpa server: siswa masuk dengan nama dan profilnya dibuat otomatis. Progres tersimpan di masing-masing perangkat, jadi daftar di bawah hanya berisi siswa yang pernah masuk di perangkat ini.</Feedback>
       )}
+      {!IS_STANDALONE && (
       <Card>
         <h2 className="mb-3 font-extrabold text-navy">Tambah Kode Siswa</h2>
         <form onSubmit={submit} className="grid gap-3 sm:grid-cols-4" noValidate>
@@ -53,23 +54,27 @@ export default function Admin() {
         </form>
         {msg && <div className="mt-3"><Feedback ok={msg.ok}>{msg.text}</Feedback></div>}
       </Card>
+      )}
 
       <Card>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <h2 className="font-extrabold text-navy">Daftar Siswa ({data?.students.length ?? 0})</h2>
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Cari kode/nama..." className="min-h-10 rounded-lg border border-slate-300 px-3 text-sm" aria-label="Cari siswa" />
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Cari nama..." className="min-h-10 rounded-lg border border-slate-300 px-3 text-sm" aria-label="Cari siswa" />
         </div>
         {loading ? <Spinner /> : error ? <ErrorBox message={error} onRetry={reload} /> : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[520px] text-left text-sm">
               <thead className="border-b border-slate-200 text-slate-500">
-                <tr><th className="py-2">Kode</th><th>Nama</th><th>Kelas</th><th className="text-right">XP</th><th className="text-right">Misi</th><th className="text-right">Literasi</th></tr>
+                <tr>{!IS_STANDALONE && <th className="py-2">Kode</th>}<th className="py-2">Nama</th><th>Kelas</th><th className="text-right">XP</th><th className="text-right">Misi</th><th className="text-right">Literasi</th></tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
+                {students.length === 0 && (
+                  <tr><td colSpan={6} className="py-6 text-center text-slate-500">{query ? 'Tidak ada nama yang cocok.' : 'Belum ada siswa yang masuk di perangkat ini.'}</td></tr>
+                )}
                 {students.map((s) => (
                   <tr key={s.id}>
-                    <td className="formula py-2 font-bold">{s.student_code}</td>
-                    <td>{s.full_name}</td>
+                    {!IS_STANDALONE && <td className="formula py-2 font-bold">{s.student_code}</td>}
+                    <td className="py-2 font-semibold">{s.full_name}</td>
                     <td>{s.class_name}</td>
                     <td className="text-right">{s.total_xp}</td>
                     <td className="text-right">{s.missions_completed}/8</td>

@@ -49,7 +49,7 @@ export default function AppShell() {
               </Link>
             )}
             <Link to="/profile" className="flex items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-semibold hover:bg-white/10" aria-label="Profil">
-              <User className="size-5" /><span className="hidden sm:inline">{user?.student_code}</span>
+              <User className="size-5" /><span className="hidden max-w-40 truncate sm:inline">{user?.role === 'teacher' ? user?.student_code : user?.full_name}</span>
             </Link>
             <button onClick={logout} className="flex items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-semibold text-blue-100 hover:bg-white/10" aria-label="Keluar">
               <LogOut className="size-5" /><span className="hidden sm:inline">Keluar</span>

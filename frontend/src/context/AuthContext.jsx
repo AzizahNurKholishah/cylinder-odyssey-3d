@@ -28,12 +28,19 @@ export function AuthProvider({ children }) {
     return d.profile
   }, [])
 
+  const loginStudent = useCallback(async (name) => {
+    const d = await API.loginStudent(name)
+    tokenStore.set(d.token)
+    setUser(d.profile)
+    return d
+  }, [])
+
   const logout = useCallback(() => {
     tokenStore.clear()
     setUser(null)
   }, [])
 
-  const value = useMemo(() => ({ user, loading, login, logout }), [user, loading, login, logout])
+  const value = useMemo(() => ({ user, loading, login, loginStudent, logout }), [user, loading, login, loginStudent, logout])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 

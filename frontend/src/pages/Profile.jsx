@@ -17,7 +17,7 @@ export default function Profile() {
 
   return (
     <div className="space-y-5">
-      <PageHeader icon={User} eyebrow="Profil Penjelajah" title={profile.full_name || profile.student_code} subtitle={`${profile.student_code} · Kelas ${profile.class_name}`} />
+      <PageHeader icon={User} eyebrow="Profil Penjelajah" title={profile.full_name || profile.student_code} subtitle={`${profile.student_code !== profile.full_name ? `${profile.student_code} · ` : ''}Kelas ${profile.class_name}`} />
 
       <div className="grid gap-3 sm:grid-cols-4">
         {[

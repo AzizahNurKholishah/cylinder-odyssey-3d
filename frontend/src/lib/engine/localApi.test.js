@@ -2,7 +2,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import content from '../../content/generated/content.json'
 import { gradeStep, parseCandidates } from './grading.js'
-import { localAPI as api, resetLocalDb, setLocalToken, TEACHER_ACCESS_KEY } from './localApi.js'
+import { localAPI as api, resetLocalDb, setLocalToken, TEACHER_ACCESS_KEY, validateName } from './localApi.js'
 
 const FULL = {
   'LIT-1': { r_b: '3,5', lp_a: '748', lp_b: '957', pilih: 'a', alasan: 'Desain A lebih hemat karena luasnya 748 cm² lebih kecil dari 957 cm².' },
@@ -11,8 +11,14 @@ const FULL = {
   'LIT-4': { lp_satu: '5632', lp_total: '33792', lembar: '6,76', klaim: 'a', beli: '7', alasan: 'Kalau beli 6 lembar sengnya kurang, jadi dibulatkan ke atas.' },
 }
 
-async function login(code = 'SMP8-01', key) {
-  const r = await api.login(code, key)
+/** Masuk sebagai siswa dengan nama bebas. */
+async function login(name = 'Budi Santoso') {
+  const r = await api.loginStudent(name)
+  setLocalToken(r.token)
+  return r
+}
+async function loginTeacher() {
+  const r = await api.login('GURU-01', TEACHER_ACCESS_KEY)
   setLocalToken(r.token)
   return r
 }
@@ -22,18 +28,69 @@ const step = (id, sid) => q(id).steps.find((s) => s.id === sid)
 
 beforeEach(() => { resetLocalDb(); setLocalToken(null) })
 
-describe('login', () => {
-  it('validasi kode', async () => {
-    expect((await err(api.login(''))).code).toBe('empty_code')
-    expect((await err(api.login('!!'))).code).toBe('invalid_format')
-    expect((await err(api.login('SMP8-99'))).code).toBe('not_registered')
-    expect((await api.login(' smp8-30 ')).profile.student_code).toBe('SMP8-30')
+describe('masuk dengan nama bebas', () => {
+  it.each([
+    ['', 'empty_name'],
+    ['   ', 'empty_name'],
+    ['A', 'name_too_short'],
+    ['12', 'name_too_short'],
+    ['B7', 'name_too_short'],
+    ['x'.repeat(41), 'name_too_long'],
+    ['<script>', 'invalid_name'],
+    ['Budi;DROP', 'invalid_name'],
+  ])('nama tidak valid %j → %s', async (name, code) => {
+    expect((await err(api.loginStudent(name))).code).toBe(code)
+    expect(validateName(name).code).toBe(code)
   })
-  it('akun guru butuh access key', async () => {
+
+  it.each(['Al', 'Budi Santoso', "Nur'aini", 'Siti Nurhaliza Putri', 'Ahmad 2', 'Dewi-Lestari', 'Élodie'])('nama valid %j', async (name) => {
+    expect(validateName(name)).toBeNull()
+    const r = await api.loginStudent(name)
+    expect(r.profile.role).toBe('student')
+    expect(r.profile.full_name).toBe(name)
+  })
+
+  it('nama baru → profil baru dengan XP 0 dan progres awal', async () => {
+    const r = await login('Budi Santoso')
+    expect(r.is_new).toBe(true)
+    const d = await api.dashboard()
+    expect(d.profile.full_name).toBe('Budi Santoso')
+    expect(d.stats.xp).toBe(0)
+    expect(d.progress_percent).toBe(0)
+    expect(d.lessons[0].is_unlocked).toBe(true)
+    expect(d.lessons[1].is_unlocked).toBe(false)
+  })
+
+  it('nama yang sama memuat kembali progres (abaikan huruf besar/kecil & spasi)', async () => {
+    await login('Budi Santoso')
+    await api.completeLesson('lembah-lingkaran')
+    setLocalToken(null)
+    for (const variant of ['Budi Santoso', 'budi santoso', '  BUDI   santoso  ']) {
+      const r = await login(variant)
+      expect(r.is_new).toBe(false)
+      expect(r.profile.full_name).toBe('Budi Santoso')
+      expect((await api.dashboard()).stats.xp).toBe(50)
+    }
+  })
+
+  it('nama berbeda = siswa berbeda', async () => {
+    await login('Budi Santoso')
+    await api.completeLesson('lembah-lingkaran')
+    expect((await login('Budi Santosa')).is_new).toBe(true)
+    expect((await api.dashboard()).stats.xp).toBe(0)
+  })
+
+  it('kode SMP8-xx tidak diperlukan lagi', async () => {
+    expect((await err(api.login('SMP8-01'))).code).toBe('not_registered')
+  })
+
+  it('akun guru tetap memakai kode + access key', async () => {
     expect((await err(api.login('GURU-01'))).code).toBe('access_key_required')
     expect((await err(api.login('GURU-01', 'salah'))).code).toBe('invalid_access_key')
-    expect((await api.login('GURU-01', TEACHER_ACCESS_KEY)).profile.role).toBe('teacher')
+    expect((await err(api.login(''))).code).toBe('empty_code')
+    expect((await api.login(' guru-01 ', TEACHER_ACCESS_KEY)).profile.role).toBe('teacher')
   })
+
   it('halaman privat butuh sesi', async () => {
     expect((await err(api.dashboard())).status).toBe(401)
   })
@@ -54,9 +111,9 @@ describe('materi & XP', () => {
     expect(d.recommendation.route).toBe('/lesson/bengkel-jaring')
   })
   it('data tiap siswa terpisah', async () => {
-    await login('SMP8-01')
+    await login('Siti')
     await api.completeLesson('lembah-lingkaran')
-    await login('SMP8-02')
+    await login('Andi')
     expect((await api.dashboard()).stats.xp).toBe(0)
   })
 })
@@ -168,13 +225,16 @@ describe('game, lab, profil, guru', () => {
     expect(p.best_evaluation.total_score).toBe(24)
     expect(p.history.length).toBeGreaterThan(0)
   })
-  it('panel guru', async () => {
-    await login()
+  it('panel guru melihat siswa yang masuk di perangkat ini', async () => {
+    await login('Budi Santoso')
     expect((await err(api.adminStudents())).status).toBe(403)
-    await login('GURU-01', TEACHER_ACCESS_KEY)
-    expect((await api.adminCreateStudent({ student_code: 'smp8-31', full_name: 'Siswa 31' })).student.student_code).toBe('SMP8-31')
-    expect((await err(api.adminCreateStudent({ student_code: 'SMP8-31' }))).status).toBe(409)
-    expect((await api.adminStudents()).students).toHaveLength(31)
-    await login('SMP8-31')
+    await api.submitEvaluation(FULL)
+    await login('Andi')
+    await loginTeacher()
+    const list = (await api.adminStudents()).students
+    expect(list.map((s) => s.full_name)).toEqual(['Andi', 'Budi Santoso'])
+    const budi = list.find((s) => s.full_name === 'Budi Santoso')
+    expect(budi.latest_literacy_total).toBe(24)
+    expect(list.find((s) => s.full_name === 'Andi').total_xp).toBe(0)
   })
 })

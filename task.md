@@ -41,6 +41,14 @@
 - [x] Perbaikan: setelah Keluar, pengguna berikutnya tidak diarahkan ke halaman milik pengguna sebelumnya
 - [x] GitHub Pages berjalan standalone
 
+## Masuk dengan Nama Bebas ✅
+- [x] Siswa cukup mengetik nama (min. 2 huruf, maks. 40 karakter); profil dibuat otomatis di localStorage dengan XP 0
+- [x] Nama yang sama (abaikan huruf besar/kecil & spasi) memuat kembali progres
+- [x] Tautan kecil "Masuk sebagai Guru" (GURU-01 + access key) untuk Panel Guru
+- [x] Panel Guru menampilkan siswa yang pernah masuk di perangkat itu; formulir tambah kode disembunyikan di mode standalone
+- [x] Mode server tetap memakai kode siswa
+- [x] 47 tes vitest + E2E browser lulus
+
 ## Catatan untuk Peneliti
 - Soal Final Challenge & rubrik kata kunci adalah draf pengembang; perlu validasi ahli terhadap kisi-kisi asli.
 - Transkrip wawancara S01 tidak ada di repositori; pemetaan hanya memakai kode temuan dari spesifikasi.

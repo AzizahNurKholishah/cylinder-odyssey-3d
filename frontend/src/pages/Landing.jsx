@@ -4,6 +4,7 @@ import { Companion, Logo } from '../components/Brand.jsx'
 import { NetDiagram } from '../components/Diagrams.jsx'
 import { Button } from '../components/ui/index.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import { IS_STANDALONE } from '../lib/api.js'
 
 const LEARN = [
   'Mengingat kembali prasyarat lingkaran: r, d, keliling, dan luas lingkaran.',
@@ -23,7 +24,7 @@ const FEATURES = [
 ]
 
 const HOW = [
-  'Masukkan kode siswa dari gurumu.',
+  IS_STANDALONE ? 'Tulis namamu di halaman masuk.' : 'Masukkan kode siswa dari gurumu.',
   'Masuk ke dashboard petualangan.',
   'Jelajahi wilayah materi dari Level 01 hingga Level 04.',
   'Uji pemahaman di Cylinder Laboratory dan Training Zone.',
@@ -76,7 +77,7 @@ export default function Landing() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button to={start} variant="sun" icon={Play} className="text-lg">MULAI PETUALANGAN</Button>
-              <Button to="/login" variant="secondary" icon={LogIn}>Masuk dengan Kode Siswa</Button>
+              <Button to="/login" variant="secondary" icon={LogIn}>{IS_STANDALONE ? 'Masuk dengan Nama' : 'Masuk dengan Kode Siswa'}</Button>
             </div>
           </div>
           <div className="flex justify-center"><HeroCylinder /></div>

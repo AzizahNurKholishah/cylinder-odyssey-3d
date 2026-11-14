@@ -5,10 +5,10 @@
 Aplikasi pembelajaran matematika berbasis permainan untuk siswa **SMP Kelas VIII**, materi **Luas Permukaan Tabung**. Siswa menjelajahi 4 wilayah petualangan, membentangkan jaring-jaring tabung 3D, berlatih dengan petunjuk bertingkat, bermain 5 mini games, lalu menyelesaikan evaluasi Mathematical Literacy (skor parsial, maks 24).
 
 ### ▶ Coba sekarang: **<https://azizahnurkholishah.github.io/cylinder-odyssey-3d/>**
-Masuk dengan kode `SMP8-01` … `SMP8-30`. Tidak perlu server: aplikasi berjalan sepenuhnya di browser/HP dan progres tersimpan di perangkat.
+Cukup ketik **nama** (minimal 2 huruf) lalu langsung masuk. Tidak perlu server: aplikasi berjalan sepenuhnya di browser/HP dan progres tersimpan di perangkat. Masuk lagi dengan nama yang sama untuk melanjutkan progres.
 
 ## Fitur
-- Login **kode siswa** + panel guru. Berjalan **standalone** (tanpa server, progres di `localStorage`) atau dengan backend FastAPI + Supabase.
+- Siswa masuk dengan **nama bebas** (mode standalone) atau **kode siswa** (mode server) + panel guru. Berjalan **standalone** (tanpa server, progres di `localStorage`) atau dengan backend FastAPI + Supabase.
 - **Adventure Map** 4 level: Lembah Lingkaran → Bengkel Jaring-Jaring → Benteng Tabung Terbuka → Puncak Literasi.
 - **Cylinder Laboratory**: model 3D Three.js (putar 360°, mode tertutup/tanpa tutup/selimut), jaring-jaring 3D dengan slider, dimension builder, kalkulator langkah demi langkah.
 - **Training Zone**: 5 jenis soal, 3 tingkat, deteksi kesalahan umum, Hint 1–3, refleksi.
@@ -63,10 +63,12 @@ Default `DATA_BACKEND=memory` → langsung bisa dicoba tanpa Supabase (data cont
 Isi `VITE_API_URL=http://localhost:8000` di `frontend/.env`, lalu `npm run dev`.
 
 ### Akun Contoh
-| Kode | Peran |
-|---|---|
-| `SMP8-01` … `SMP8-30` | Siswa |
-| `GURU-01` + access key `guru-tabung-2026` (standalone; ubah lewat `VITE_TEACHER_ACCESS_KEY`) | Guru |
+| Mode | Siswa | Guru |
+|---|---|---|
+| Standalone (default) | Ketik nama bebas (min. 2 huruf). Nama baru → profil baru (XP 0); nama yang sama (tanpa membedakan huruf besar/kecil & spasi) → progres dimuat | Tautan **Masuk sebagai Guru**: `GURU-01` + access key `guru-tabung-2026` (ubah lewat `VITE_TEACHER_ACCESS_KEY`) |
+| Server | Kode `SMP8-01` … `SMP8-30` dari tabel `profiles` | `GURU-01` + `TEACHER_ACCESS_KEY` |
+
+Catatan: pada mode standalone, dua siswa yang mengetik nama persis sama di perangkat yang sama akan berbagi profil. Tambahkan nama belakang atau nomor absen bila perlu (mis. "Budi 07").
 
 ## Pengujian
 ```bash

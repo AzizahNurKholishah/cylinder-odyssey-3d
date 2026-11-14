@@ -55,6 +55,7 @@ export async function api(path, { method = 'GET', body } = {}) {
 
 const remoteAPI = {
   login: (student_code, access_key) => api('/auth/login', { method: 'POST', body: { student_code, access_key } }),
+  loginStudent: async () => { throw new ApiError(400, 'unsupported', 'Mode server memakai kode siswa.') },
   me: () => api('/auth/me'),
   dashboard: () => api('/me/dashboard'),
   profile: () => api('/me/profile'),

@@ -44,9 +44,25 @@ const uid = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36
 const clone = (x) => JSON.parse(JSON.stringify(x))
 const normalizeCode = (raw) => String(raw || '').trim().toUpperCase().replace(/\s/g, '')
 
+// Akun guru bawaan; siswa mendaftar sendiri dengan nama (disimpan di db.extraProfiles).
 function allProfiles(db) {
-  const base = content.profiles.map((p) => ({ ...p, id: p.student_code, created_at: null }))
-  return [...base, ...db.extraProfiles]
+  const teachers = content.profiles.filter((p) => p.role === 'teacher').map((p) => ({ ...p, id: p.student_code, created_at: null }))
+  return [...teachers, ...db.extraProfiles]
+}
+
+export const NAME_MAX = 40
+/** Rapikan nama untuk ditampilkan: hapus spasi berlebih. */
+export const normalizeName = (raw) => String(raw ?? '').normalize('NFC').trim().replace(/\s+/g, ' ')
+/** Kunci identitas: nama yang sama (abaikan huruf besar/kecil & spasi) = siswa yang sama. */
+export const nameKey = (raw) => `nama:${normalizeName(raw).toLocaleLowerCase('id-ID')}`
+
+export function validateName(raw) {
+  const name = normalizeName(raw)
+  if (!name) return { code: 'empty_name', message: 'Nama belum diisi.' }
+  if ((name.match(/\p{L}/gu) || []).length < 2) return { code: 'name_too_short', message: 'Nama minimal 2 huruf.' }
+  if (name.length > NAME_MAX) return { code: 'name_too_long', message: `Nama maksimal ${NAME_MAX} karakter.` }
+  if (!/^[\p{L}\p{M}0-9 .'-]+$/u.test(name)) return { code: 'invalid_name', message: 'Nama hanya boleh berisi huruf, angka, spasi, titik, tanda petik, atau tanda hubung.' }
+  return null
 }
 const publicProfile = (p) => ({ id: p.id, student_code: p.student_code, full_name: p.full_name, class_name: p.class_name, role: p.role })
 
@@ -63,8 +79,8 @@ export const setLocalToken = (t) => { currentToken = t }
 function currentUser(db, token) {
   const t = token ?? currentToken
   if (!t || !t.startsWith(SESSION_PREFIX)) fail(401, 'not_authenticated', 'Silakan masuk terlebih dahulu.')
-  const code = t.slice(SESSION_PREFIX.length)
-  const p = allProfiles(db).find((x) => x.student_code === code)
+  const id = t.slice(SESSION_PREFIX.length)
+  const p = allProfiles(db).find((x) => x.id === id)
   if (!p) fail(401, 'invalid_token', 'Akun tidak ditemukan. Silakan masuk kembali.')
   return p
 }
@@ -201,17 +217,32 @@ function tx(fn, { auth = true, write = false } = {}) {
 }
 
 export const localAPI = {
+  /** Siswa: masuk dengan nama bebas. Nama baru → profil baru (XP 0); nama lama → progres dimuat. */
+  loginStudent: (rawName) => tx(({ db }) => {
+    const invalid = validateName(rawName)
+    if (invalid) fail(400, invalid.code, invalid.message)
+    const name = normalizeName(rawName)
+    const id = nameKey(name)
+    let p = db.extraProfiles.find((x) => x.id === id)
+    const isNew = !p
+    if (isNew) {
+      p = { id, student_code: name, full_name: name, class_name: 'VIII', role: 'student', created_at: now() }
+      db.extraProfiles.push(p)
+      userData(db, id)
+    }
+    return { token: SESSION_PREFIX + id, profile: publicProfile(p), is_new: isNew }
+  }, { auth: false, write: true }),
+
+  /** Guru: kode guru + access key. */
   login: (code, accessKey) => tx(({ db }) => {
     const c = normalizeCode(code)
-    if (!c) fail(400, 'empty_code', 'Kode siswa belum diisi.')
-    if (!CODE_PATTERN.test(c)) fail(400, 'invalid_format', 'Format kode tidak valid. Contoh: SMP8-01.')
-    const p = allProfiles(db).find((x) => x.student_code === c)
-    if (!p) fail(404, 'not_registered', 'Kode siswa tidak terdaftar. Tanyakan kodemu kepada guru.')
-    if (p.role === 'teacher') {
-      if (!accessKey) fail(401, 'access_key_required', 'Akun guru membutuhkan access key.')
-      if (accessKey !== TEACHER_ACCESS_KEY) fail(401, 'invalid_access_key', 'Access key guru salah.')
-    }
-    return { token: SESSION_PREFIX + p.student_code, profile: publicProfile(p) }
+    if (!c) fail(400, 'empty_code', 'Kode guru belum diisi.')
+    if (!CODE_PATTERN.test(c)) fail(400, 'invalid_format', 'Format kode tidak valid. Contoh: GURU-01.')
+    const p = allProfiles(db).find((x) => x.role === 'teacher' && x.student_code === c)
+    if (!p) fail(404, 'not_registered', 'Kode guru tidak dikenal. Siswa cukup masuk dengan nama.')
+    if (!accessKey) fail(401, 'access_key_required', 'Akun guru membutuhkan access key.')
+    if (accessKey !== TEACHER_ACCESS_KEY) fail(401, 'invalid_access_key', 'Access key guru salah.')
+    return { token: SESSION_PREFIX + p.id, profile: publicProfile(p) }
   }, { auth: false }),
 
   me: () => tx(({ p }) => ({ profile: publicProfile(p) })),
@@ -327,7 +358,7 @@ export const localAPI = {
 
   adminStudents: () => tx(({ db, p }) => {
     if (p.role !== 'teacher') fail(403, 'forbidden', 'Halaman ini khusus guru.')
-    const students = allProfiles(db).filter((x) => x.role === 'student').sort((a, b) => a.student_code.localeCompare(b.student_code))
+    const students = allProfiles(db).filter((x) => x.role === 'student').sort((a, b) => a.full_name.localeCompare(b.full_name, 'id'))
     return {
       students: students.map((s) => {
         const u = db.users[s.id]
@@ -337,13 +368,4 @@ export const localAPI = {
       }),
     }
   }),
-  adminCreateStudent: ({ student_code, full_name = '', class_name = 'VIII' }) => tx(({ db, p }) => {
-    if (p.role !== 'teacher') fail(403, 'forbidden', 'Halaman ini khusus guru.')
-    const code = normalizeCode(student_code)
-    if (!CODE_PATTERN.test(code)) fail(400, 'invalid_format', 'Format kode tidak valid. Contoh: SMP8-31.')
-    if (allProfiles(db).some((x) => x.student_code === code)) fail(409, 'duplicate_code', 'Kode siswa sudah terdaftar.')
-    const row = { id: code, student_code: code, full_name: full_name.trim() || `Siswa ${code}`, class_name: class_name.trim() || 'VIII', role: 'student', created_at: now() }
-    db.extraProfiles.push(row)
-    return { student: publicProfile(row) }
-  }, { write: true }),
 }

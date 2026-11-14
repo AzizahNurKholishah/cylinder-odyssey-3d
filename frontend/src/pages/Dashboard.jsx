@@ -29,7 +29,7 @@ export default function Dashboard() {
       <section className="overflow-hidden rounded-3xl bg-navy p-5 text-white sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-sm text-blue-200">{profile.student_code} · Kelas {profile.class_name}</p>
+            <p className="text-sm text-blue-200">{profile.student_code !== profile.full_name && `${profile.student_code} · `}Kelas {profile.class_name}</p>
             <h1 className="text-2xl font-black sm:text-3xl">Halo, {firstName}! 👋</h1>
             <p className="mt-1 text-blue-100">Level {stats.level} · <span className="font-semibold text-sun">{stats.title}</span></p>
           </div>
